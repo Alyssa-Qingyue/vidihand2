@@ -771,7 +771,7 @@
       <div class="meta" style="margin-top:4px; font-size:0.85rem;"><sup>1</sup>Nanyang Technological University &nbsp; <sup>2</sup>Shanghai Jiao Tong University</div>
       <div class="links">
         <a class="btn" href="https://github.com/NTUYWANG103/ViDiHand">Code</a>
-        <a class="btn" href="#">ArXiv</a>
+        <a class="btn" href="https://arxiv.org/abs/2606.30308">ArXiv</a>
       </div>
     </div>
 
@@ -1006,8 +1006,24 @@
     </div>
   </section>
 
+  <section class="container" id="citation" style="padding:26px 0 8px;">
+    <h2 class="section-title">Citation</h2>
+    <div class="panel" style="margin-top:18px; padding:20px 22px; position:relative;">
+      <button class="btn" style="position:absolute; top:14px; right:14px; cursor:pointer;" onclick="const b=this; navigator.clipboard.writeText(document.getElementById('bibtex').textContent).then(()=>{const o=b.textContent; b.textContent='Copied!'; setTimeout(()=>{b.textContent=o;},1500);});">Copy</button>
+      <pre id="bibtex" style="margin:0; overflow-x:auto; font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace; font-size:0.85rem; line-height:1.55; color:#1f2937; white-space:pre;">@misc{wang2026surprisingeffectivenessvideodiffusion,
+      title={The Surprising Effectiveness of Video Diffusion Models for Hand Motion Reconstruction},
+      author={Yuxi Wang and Chengkai Jin and Yufei Liu and Wenqi Ouyang and Tianyi Wei and Zhiwei Zeng and Siyuan Huang and Zhiqi Shen and Xingang Pan},
+      year={2026},
+      eprint={2606.30308},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2606.30308},
+}</pre>
+    </div>
+  </section>
+
   <footer>
-    Citation / BibTeX · Contact · Acknowledgements
+    © 2026 ViDiHand · Nanyang Technological University &amp; Shanghai Jiao Tong University
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
