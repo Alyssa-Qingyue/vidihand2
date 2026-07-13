@@ -44,6 +44,11 @@
       margin: 0 auto;
     }
 
+    html {
+      /* keep anchor-jump targets clear of the sticky nav */
+      scroll-padding-top: 64px;
+    }
+
     .top-nav {
       position: sticky;
       top: 0;
@@ -51,6 +56,13 @@
       backdrop-filter: blur(10px);
       background: rgba(248, 251, 255, 0.82);
       border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      /* let clicks pass through the translucent bar to content beneath;
+         nav links re-enable their own pointer events below */
+      pointer-events: none;
+    }
+
+    .top-nav a {
+      pointer-events: auto;
     }
 
     .top-nav-inner {
@@ -536,6 +548,56 @@
       font-size: 0.9rem;
     }
 
+    footer a {
+      color: #64748b;
+      border-bottom: 1px dotted #94a3b8;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    footer a:hover {
+      color: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    .citation-panel {
+      position: relative;
+      max-width: 880px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .citation-panel pre {
+      margin: 0;
+      padding: 22px 26px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: #334155;
+      text-align: left;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border-radius: 999px;
+      border: 1px solid #cfd8ec;
+      background: #fff;
+      color: #1f2937;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.14);
+      border-color: #b8c5e7;
+    }
+
     /* ── Scroll fade-in ── */
     .reveal {
       opacity: 0;
@@ -771,7 +833,7 @@
       <div class="meta" style="margin-top:4px; font-size:0.85rem;"><sup>1</sup>Nanyang Technological University &nbsp; <sup>2</sup>Shanghai Jiao Tong University</div>
       <div class="links">
         <a class="btn" href="https://github.com/NTUYWANG103/ViDiHand">Code</a>
-        <a class="btn" href="https://arxiv.org/abs/2606.30308">ArXiv</a>
+        <a class="btn" href="https://arxiv.org/abs/2606.30308" target="_blank" rel="noopener">ArXiv</a>
       </div>
     </div>
 
@@ -1006,11 +1068,12 @@
     </div>
   </section>
 
-  <section class="container" id="citation" style="padding:26px 0 8px;">
+  <section class="container" id="citation">
     <h2 class="section-title">Citation</h2>
-    <div class="panel" style="margin-top:18px; padding:20px 22px; position:relative;">
-      <button class="btn" style="position:absolute; top:14px; right:14px; cursor:pointer;" onclick="const b=this; navigator.clipboard.writeText(document.getElementById('bibtex').textContent).then(()=>{const o=b.textContent; b.textContent='Copied!'; setTimeout(()=>{b.textContent=o;},1500);});">Copy</button>
-      <pre id="bibtex" style="margin:0; overflow-x:auto; font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace; font-size:0.85rem; line-height:1.55; color:#1f2937; white-space:pre;">@misc{wang2026surprisingeffectivenessvideodiffusion,
+    <p class="section-desc">If you find ViDiHand useful for your research, please consider citing our paper.</p>
+    <div class="panel citation-panel">
+      <button class="copy-btn" onclick="copyBibtex(this)">Copy</button>
+      <pre id="bibtex">@misc{wang2026surprisingeffectivenessvideodiffusion,
       title={The Surprising Effectiveness of Video Diffusion Models for Hand Motion Reconstruction},
       author={Yuxi Wang and Chengkai Jin and Yufei Liu and Wenqi Ouyang and Tianyi Wei and Zhiwei Zeng and Siyuan Huang and Zhiqi Shen and Xingang Pan},
       year={2026},
@@ -1023,8 +1086,18 @@
   </section>
 
   <footer>
-    © 2026 ViDiHand · Nanyang Technological University &amp; Shanghai Jiao Tong University
+    <a href="#citation">Citation / BibTeX</a> · <a href="https://arxiv.org/abs/2606.30308" target="_blank" rel="noopener">ArXiv</a> · <a href="https://github.com/NTUYWANG103/ViDiHand" target="_blank" rel="noopener">Code</a>
   </footer>
+
+  <script>
+    function copyBibtex(btn) {
+      const text = document.getElementById("bibtex").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = "Copy"; }, 1600);
+      });
+    }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script>
