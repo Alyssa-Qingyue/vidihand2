@@ -1,0 +1,26 @@
+[
+  {
+    "frame": 2305,
+    "dataset": "Gen-HumanEgo",
+    "label": "Weaving a basket",
+    "source": "gen_humanego_1h__53215ab72e6f43ecb332cb798a3dfb0e_camera3_qc_cut_001__f2305"
+  },
+  {
+    "frame": 3989,
+    "dataset": "Gen-HumanEgo",
+    "label": "Everyday manipulation",
+    "source": "gen_humanego_1h__485da52ab46c4d94af273734969e8e6a_camera3_qc_cut_001__f3989"
+  },
+  {
+    "frame": 3123,
+    "dataset": "Ego4D",
+    "label": "Washing dishes",
+    "source": "ego4d__ego4d_45e463b2-bdd5-407a-ab5c-8a5c5534e078__f3123"
+  },
+  {
+    "frame": 106,
+    "dataset": "Xperience",
+    "label": "Using a phone",
+    "source": "xperience__xp_0bc35fc7-95ce_ep5_00751__f106"
+  }
+]

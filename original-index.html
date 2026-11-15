@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ViDiHand</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --line: #e5e7eb;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --content-width: min(1180px, 92vw);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f8fbff 0%, #f6f8fc 40%, #f8f9fb 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: var(--content-width);
+      margin: 0 auto;
+    }
+
+    html {
+      /* keep anchor-jump targets clear of the sticky nav */
+      scroll-padding-top: 64px;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(248, 251, 255, 0.82);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      /* let clicks pass through the translucent bar to content beneath;
+         nav links re-enable their own pointer events below */
+      pointer-events: none;
+    }
+
+    .top-nav a {
+      pointer-events: auto;
+    }
+
+    .top-nav-inner {
+      width: var(--content-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      color: #0f172a;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      color: #334155;
+      background: #eef2ff;
+      border: 1px solid #dbe4ff;
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      padding: 48px 0 24px;
+    }
+
+    .title-wrap {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      letter-spacing: -0.02em;
+      color: #0b1328;
+    }
+
+    .subtitle {
+      margin: 10px auto 0;
+      max-width: 780px;
+      color: #334155;
+      font-size: clamp(1.02rem, 1.8vw, 1.24rem);
+    }
+
+    .meta {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid #cfd8ec;
+      background: #fff;
+      color: #1f2937;
+      padding: 8px 16px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.14);
+      border-color: #b8c5e7;
+    }
+
+    .hero-video {
+      margin-top: 28px;
+      background: #0f172a;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 25px 55px rgba(15, 23, 42, 0.26);
+      border: 1px solid #1e293b;
+    }
+
+    .hero-video video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .caption {
+      margin-top: 12px;
+      color: #475569;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.8vw, 2rem);
+      letter-spacing: -0.01em;
+      color: #0f172a;
+      text-align: center;
+    }
+
+    .section-desc {
+      margin: 8px auto 0;
+      color: #475569;
+      max-width: 760px;
+      text-align: center;
+    }
+
+    .panel {
+      margin-top: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .case-strip-wrap {
+      position: relative;
+      margin-top: 18px;
+      padding: 0 44px;
+    }
+
+    .case-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid #c8d4ee;
+      background: #ffffff;
+      color: #1e3a8a;
+      font-size: 1.1rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(30, 58, 138, 0.16);
+      z-index: 2;
+    }
+
+    .case-nav.prev {
+      left: 6px;
+    }
+
+    .case-nav.next {
+      right: 6px;
+    }
+
+    .case-strip-viewport {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+    }
+
+    .case-strip {
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      transition: transform 0.35s ease;
+      will-change: transform;
+    }
+
+    .case-button {
+      border: 1px solid #d8e0f0;
+      background: #f8fbff;
+      border-radius: var(--radius-md);
+      padding: 6px;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      text-align: left;
+      flex: 0 0 calc((100% - 48px) / 5);
+      min-width: 160px;
+    }
+
+    .case-button:hover {
+      transform: translateY(-3px);
+      border-color: #7fa0ec;
+      box-shadow: 0 0 0 3px rgba(99, 155, 235, 0.18), 0 12px 28px rgba(30, 58, 138, 0.14);
+    }
+
+    .case-button.active {
+      border-color: #7fa0ec;
+      background: #eef4ff;
+      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.22);
+    }
+
+    .case-button video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #0f172a;
+    }
+
+    .case-label {
+      margin-top: 5px;
+      font-size: 0.72rem;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .recon-3d-panel {
+      margin-top: 14px;
+      background: #090f1e;
+      border: 1px solid #1d2a45;
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      box-shadow: 0 16px 36px rgba(2, 8, 23, 0.45);
+    }
+
+    .recon-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: #dbe8ff;
+    }
+
+    .recon-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .recon-note {
+      font-size: 0.78rem;
+      color: #8ea3c7;
+    }
+
+    .recon-layout {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .recon-top-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .recon-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .side-view {
+      position: relative;
+      border: 1px solid #243556;
+      border-radius: 11px;
+      overflow: hidden;
+      background: #050914;
+      aspect-ratio: 16 / 9;
+    }
+
+    .side-view video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .view-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(173, 197, 238, 0.32);
+      background: rgba(12, 18, 33, 0.62);
+      color: #dce9ff;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .compare-col {
+      border: 1px dashed #c9d2e3;
+      background: linear-gradient(180deg, #f8fbff 0%, #f3f6fb 100%);
+      border-radius: var(--radius-md);
+      min-height: 190px;
+      padding: 10px;
+      color: #64748b;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .compare-col.ours {
+      border-style: solid;
+      border-color: #8fb0ff;
+      box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.12);
+      color: #1e3a8a;
+      background: linear-gradient(180deg, #eef4ff 0%, #f4f8ff 100%);
+    }
+
+    .method-figure {
+      width: 100%;
+      display: block;
+      border-radius: var(--radius-lg);
+      border: 1px solid #d9e1f0;
+      background: white;
+    }
+
+    .method-desc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .method-desc-item {
+      background: #fff;
+      border: 1px solid #e2eaf8;
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .method-desc-tag {
+      display: inline-block;
+      background: #eef4ff;
+      color: #1e3a8a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid #c7d7f0;
+      margin-bottom: 10px;
+    }
+
+    .method-desc-item p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .method-desc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+      background: #fff;
+    }
+
+    .quant-table {
+      font-size: 0.82rem;
+      min-width: 900px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .quant-table th {
+      background: #f1f5fb;
+      color: #1e3a8a;
+      font-weight: 700;
+      padding: 10px 10px;
+      text-align: center;
+      border-bottom: 2px solid #c7d7f0;
+    }
+
+    .quant-table th.col-group {
+      border-left: 1px solid #dbe4f0;
+    }
+
+    .quant-table .subheader th {
+      background: #f8fafc;
+      font-size: 0.75rem;
+      color: #475569;
+      font-weight: 600;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .quant-table td {
+      padding: 6px 10px;
+      text-align: center;
+      border-bottom: 1px solid #eef2f8;
+      color: #374151;
+    }
+
+    .quant-table .dataset-label {
+      font-weight: 800;
+      color: #1e3a8a;
+      background: #eef4ff;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      border-right: 2px solid #c7d7f0;
+      white-space: nowrap;
+    }
+
+    .quant-table .ours-row td {
+      background: #f0f7ff;
+      font-weight: 600;
+    }
+
+    .quant-table .block-sep td {
+      border-top: 2px solid #c7d7f0;
+    }
+
+    .quant-table td.best {
+      font-weight: 700;
+      color: #1d4ed8;
+    }
+
+    th, td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 0.94rem;
+    }
+
+    th {
+      color: #334155;
+      background: #f8fafc;
+      font-weight: 700;
+    }
+
+    td.best {
+      font-weight: 700;
+      color: #1d4ed8;
+    }
+
+    footer {
+      padding: 30px 0 44px;
+      color: #64748b;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #64748b;
+      border-bottom: 1px dotted #94a3b8;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    footer a:hover {
+      color: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    .citation-panel {
+      position: relative;
+      max-width: 880px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .citation-panel pre {
+      margin: 0;
+      padding: 22px 26px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: #334155;
+      text-align: left;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border-radius: 999px;
+      border: 1px solid #cfd8ec;
+      background: #fff;
+      color: #1f2937;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.14);
+      border-color: #b8c5e7;
+    }
+
+    /* ── Scroll fade-in ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Card hover glow handled above ── */
+
+    @media (max-width: 980px) {
+      .case-strip-wrap {
+        padding: 0 38px;
+      }
+
+      .case-button {
+        flex-basis: calc((100% - 28px) / 3);
+        min-width: 150px;
+      }
+
+      .recon-layout {
+        grid-template-columns: 1fr;
+        aspect-ratio: auto;
+      }
+
+      .main-view,
+      .side-view {
+        aspect-ratio: 16 / 9;
+      }
+
+      .compare-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* ── Comparison Section ── */
+    .panel-switch {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .panel-switch-btn {
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid #d8e0f0;
+      background: #f8fbff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .panel-switch-btn:hover {
+      border-color: #7fa0ec;
+      color: #1e3a8a;
+    }
+
+    .panel-switch-btn.active {
+      background: #1e3a8a;
+      border-color: #1e3a8a;
+      color: #fff;
+    }
+
+    .cmp-method-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .cmp-method-chip {
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid #d8e0f0;
+      background: #f8fbff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .cmp-method-chip:hover {
+      border-color: #7fa0ec;
+    }
+
+    .cmp-method-chip.selected {
+      background: #eef4ff;
+      border-color: #7fa0ec;
+      color: #1e3a8a;
+    }
+
+    .cmp-method-chip.ours {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #fff;
+      cursor: default;
+    }
+
+    .cmp-viz-tabs {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .cmp-viz-tab {
+      padding: 5px 14px;
+      border-radius: 8px;
+      border: 1px solid #d8e0f0;
+      background: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .cmp-viz-tab:hover {
+      border-color: #7fa0ec;
+    }
+
+    .cmp-viz-tab.active {
+      background: #1e3a8a;
+      border-color: #1e3a8a;
+      color: #fff;
+    }
+
+    .cmp-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .cmp-card {
+      border: 1px solid #d8e0f0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #f8fbff;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .cmp-card.ours-card {
+      border-color: #7fa0ec;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+      background: #eef4ff;
+    }
+
+    .cmp-card video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #0f172a;
+    }
+
+    .cmp-card-label {
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #334155;
+      text-align: center;
+    }
+
+    .cmp-card.ours-card .cmp-card-label {
+      color: #1e3a8a;
+    }
+
+    .cmp-card.source-card {
+      border-color: #34d399;
+      background: #ecfdf5;
+      box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2);
+    }
+
+    .cmp-card.source-card .cmp-card-label {
+      color: #065f46;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 32px;
+      }
+
+      .case-strip-wrap {
+        padding: 0 34px;
+      }
+
+      .case-button {
+        flex-basis: 100%;
+        min-width: 0;
+      }
+
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top-nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div class="brand">ViDiHand</div>
+      <div class="nav-links">
+        <a href="#demo">Demo</a>
+        <a href="#radar">Performance</a>
+        <a href="#reconstruction">Results</a>
+        <a href="#method">Method</a>
+        <a href="#quantitative">Statics</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container" id="demo">
+    <div class="title-wrap">
+      <h1>ViDiHand</h1>
+      <p class="subtitle" style="font-size:clamp(1.05rem,1.6vw,1.25rem); font-weight:600; color:#1e293b; white-space:nowrap; max-width:none; text-align:center;">The Surprising Effectiveness of Video Diffusion Models for Hand Motion Reconstruction</p>
+      <div class="meta">Yuxi Wang<sup>1</sup>, Chengkai Jin<sup>1</sup>, Yufei Liu<sup>2</sup>, Wenqi Ouyang<sup>1</sup>, Tianyi Wei<sup>1</sup>, Zhiwei Zeng<sup>1</sup>, Siyuan Huang<sup>2</sup>, Zhiqi Shen<sup>1</sup>, Xingang Pan<sup>1</sup></div>
+      <div class="meta" style="margin-top:4px; font-size:0.85rem;"><sup>1</sup>Nanyang Technological University &nbsp; <sup>2</sup>Shanghai Jiao Tong University</div>
+      <div class="links">
+        <a class="btn" href="https://github.com/NTUYWANG103/ViDiHand">Code</a>
+        <a class="btn" href="https://arxiv.org/abs/2606.30308" target="_blank" rel="noopener">ArXiv</a>
+      </div>
+    </div>
+
+    <div class="hero-video panel">
+      <video autoplay muted loop playsinline controls preload="metadata">
+        <source src="ViDiHand-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+  </header>
+
+  <section class="container" id="radar" style="padding:18px 0;">
+    <h2 class="section-title">Performance Overview</h2>
+    <p class="section-desc">ViDiHand satisfies the target properties of occlusion robustness, accuracy, and temporal smoothness for 4D hand recovery.</p>
+    <div class="panel" style="padding: 14px 24px;">
+      <div style="display:flex; align-items:center; gap:24px; max-width:880px; margin:0 auto;">
+        <div id="radarLegendList" style="flex:0 0 auto; display:flex; flex-direction:column; gap:4px; min-width:150px;"></div>
+        <div style="flex:1; min-width:0;">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="reconstruction">
+    <h2 class="section-title">Reconstruction Results</h2>
+    <p class="section-desc">Click a case below, then switch between our results and method comparison.</p>
+
+    <div class="case-strip-wrap panel">
+      <button class="case-nav prev" id="casePrev" type="button" aria-label="Previous cases">‹</button>
+      <div class="case-strip-viewport" id="caseViewport">
+        <div class="case-strip" id="caseStrip">
+          <button class="case-button active" type="button" data-case="case01">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Hot3D/case 01/P0001_83b755aa_seg_018_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Hot3D · case 01</div>
+          </button>
+          <button class="case-button" type="button" data-case="case02">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Hot3D/case 02/P0001_95eabc0a_seg_042_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Hot3D · case 02</div>
+          </button>
+          <button class="case-button" type="button" data-case="case03">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Hot3D/case 03/P0001_95eabcOa_seg_011_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Hot3D · case 03</div>
+          </button>
+          <button class="case-button" type="button" data-case="case04">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Hot3D/case 04/P0011_0c2d00ed_seg_018_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Hot3D · case 04</div>
+          </button>
+          <button class="case-button" type="button" data-case="case05">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Hoi4D/case 01/ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Hoi4D · case 01</div>
+          </button>
+          <button class="case-button" type="button" data-case="case06">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Oakink/case 01/oakink_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">In the Wild · OakInk</div>
+          </button>
+          <button class="case-button" type="button" data-case="case07">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Ropedia/case 01/ropedia_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">In the Wild · Ropedia</div>
+          </button>
+          <button class="case-button" type="button" data-case="case08">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Arctic/case 01/s05_box_grab_01_0_seg_003_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Arctic · box grab</div>
+          </button>
+          <button class="case-button" type="button" data-case="case09">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Arctic/case 02/s05_box_use_01_0_seg_002_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Arctic · box use</div>
+          </button>
+          <button class="case-button" type="button" data-case="case10">
+            <video muted loop playsinline preload="metadata">
+              <source src="assets/datasets/Arctic/case 03/s05_notebook_grab_01_0_seg_002_source.mp4" type="video/mp4">
+            </video>
+            <div class="case-label">Arctic · notebook</div>
+          </button>
+        </div>
+      </div>
+      <button class="case-nav next" id="caseNext" type="button" aria-label="Next cases">›</button>
+    </div>
+
+    <div class="panel-switch" id="panelSwitch">
+      <button class="panel-switch-btn active" type="button" data-panel="ours">Our Results</button>
+      <button class="panel-switch-btn" type="button" data-panel="compare">Method Comparison</button>
+    </div>
+
+    <div id="panelOurs">
+      <div class="recon-3d-panel">
+        <div class="recon-header">
+          <div class="recon-title" id="reconTitle">Click ↑ a case to preview</div>
+          <div class="recon-note">Synchronized multi-view playback</div>
+        </div>
+
+        <div class="recon-layout">
+          <div class="recon-top-row">
+            <div class="side-view">
+              <span class="view-tag">Source</span>
+              <video id="viewSource" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="side-view">
+              <span class="view-tag">Joint Mesh</span>
+              <video id="viewJoint" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="side-view">
+              <span class="view-tag">3D Mesh</span>
+              <video id="viewMesh" muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <div class="recon-bottom-row">
+            <div class="side-view">
+              <span class="view-tag">Ego View</span>
+              <video id="view3DA" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="side-view">
+              <span class="view-tag">Front View</span>
+              <video id="view3DB" muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="side-view">
+              <span class="view-tag">Master View</span>
+              <video id="view3DC" muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panelCompare" style="display:none;">
+      <div class="cmp-method-row" id="cmpMethodRow"></div>
+      <div class="cmp-viz-tabs" id="cmpVizTabs"></div>
+      <div class="panel" style="padding: 14px;">
+        <div class="cmp-grid" id="cmpGrid"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="container" id="method">
+    <h2 class="section-title">Method Overview</h2>
+    <div class="method-desc-grid">
+      <div class="method-desc-item">
+        <span class="method-desc-tag">Top</span>
+        <p>The VACE branch is finetuned with hand-overlay rendering while the base DiT remains frozen, yielding a hand-aware video diffusion model.</p>
+      </div>
+      <div class="method-desc-item">
+        <span class="method-desc-tag">Middle</span>
+        <p>A lightweight dual-branch decoder extracts MANO pose, 2D joints, and translation from a single intermediate VACE feature.</p>
+      </div>
+      <div class="method-desc-item">
+        <span class="method-desc-tag">Bottom</span>
+        <p>At inference, the same feature is decoded in a single VACE pass.</p>
+      </div>
+    </div>
+    <div class="panel" style="padding: 14px;">
+      <img class="method-figure" src="ViDiHand_method.png" alt="ViDiHand method overview">
+    </div>
+  </section>
+
+  <section class="container" id="quantitative">
+    <h2 class="section-title">Quantitative Results</h2>
+    <p class="section-desc">Comparison on three egocentric benchmarks. ARCTIC and HOT3D are in-distribution; HOI4D is a held-out cross-dataset comparison fair to all methods.</p>
+    <div class="panel table-wrap">
+      <table class="quant-table">
+        <thead>
+          <tr>
+            <th class="col-dataset"></th>
+            <th class="col-method">Method</th>
+            <th colspan="3" class="col-group">Detection</th>
+            <th colspan="2" class="col-group">3D Pose</th>
+            <th colspan="3" class="col-group">Orient. &amp; Position</th>
+            <th class="col-group">Temporal</th>
+          </tr>
+          <tr class="subheader">
+            <th></th>
+            <th></th>
+            <th>FAcc ↑</th><th>Recall ↑</th><th>F1 ↑</th>
+            <th>MPJPE-p ↓</th><th>PA-MPJPE-p ↓</th>
+            <th>EPE-p ↓</th><th>GO-p ↓</th><th>CT-p ↓</th>
+            <th>Jitter ↓</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ARCTIC -->
+          <tr><td class="dataset-label" rowspan="9">ARCTIC</td>
+            <td>InterWild</td><td>0.878</td><td>0.943</td><td>0.959</td><td>30.817</td><td>15.952</td><td>53.888</td><td>25.386</td><td>0.097</td><td>46.577</td></tr>
+          <tr><td>HaMeR</td><td>0.875</td><td>0.943</td><td>0.957</td><td>29.197</td><td>14.596</td><td>65.289</td><td>24.907</td><td>0.095</td><td>18.279</td></tr>
+          <tr><td>Hamba</td><td>0.833</td><td>0.912</td><td>0.941</td><td>31.233</td><td>17.168</td><td>87.047</td><td>27.822</td><td>0.110</td><td>15.357</td></tr>
+          <tr><td>WildHands</td><td>0.879</td><td>0.946</td><td>0.960</td><td>25.704</td><td>13.941</td><td>50.517</td><td>22.320</td><td>0.058</td><td>12.972</td></tr>
+          <tr><td>WiLoR</td><td>0.919</td><td>0.951</td><td>0.974</td><td>22.012</td><td>11.873</td><td>71.527</td><td>17.358</td><td>0.075</td><td>24.091</td></tr>
+          <tr><td>Dyn-HaMR</td><td>0.842</td><td>0.918</td><td>0.951</td><td>27.904</td><td>17.017</td><td>85.723</td><td>25.951</td><td>0.121</td><td>12.840</td></tr>
+          <tr><td>HaWoR</td><td>0.700</td><td>0.817</td><td>0.895</td><td>45.357</td><td>26.375</td><td>158.062</td><td>43.325</td><td>0.149</td><td>19.789</td></tr>
+          <tr><td>OmniHands</td><td>0.866</td><td>0.949</td><td>0.954</td><td>29.674</td><td>14.203</td><td>51.505</td><td>24.580</td><td>0.087</td><td>45.312</td></tr>
+          <tr class="ours-row"><td><strong>ViDiHand (Ours)</strong></td><td class="best">0.997</td><td class="best">0.999</td><td class="best">0.999</td><td class="best">21.668</td><td class="best">9.821</td><td class="best">12.407</td><td class="best">14.642</td><td class="best">0.047</td><td class="best">3.183</td></tr>
+          <!-- HOT3D -->
+          <tr class="block-sep"><td class="dataset-label" rowspan="9">HOT3D</td>
+            <td>InterWild</td><td>0.669</td><td>0.881</td><td>0.868</td><td>77.168</td><td>24.811</td><td>71.482</td><td>58.501</td><td>0.213</td><td>101.164</td></tr>
+          <tr><td>HaMeR</td><td>0.692</td><td>0.904</td><td>0.883</td><td>68.314</td><td>21.455</td><td>59.077</td><td>49.636</td><td>0.102</td><td>23.632</td></tr>
+          <tr><td>Hamba</td><td>0.632</td><td>0.828</td><td>0.853</td><td>71.732</td><td>29.620</td><td>107.625</td><td>56.525</td><td>0.128</td><td>18.507</td></tr>
+          <tr><td>WildHands</td><td>0.655</td><td>0.863</td><td>0.844</td><td>52.791</td><td>28.946</td><td>111.438</td><td>53.933</td><td>0.157</td><td>22.885</td></tr>
+          <tr><td>WiLoR</td><td>0.827</td><td>0.897</td><td>0.937</td><td>30.966</td><td>19.980</td><td>72.978</td><td>25.746</td><td>0.098</td><td>17.976</td></tr>
+          <tr><td>Dyn-HaMR</td><td>0.614</td><td>0.811</td><td>0.802</td><td>74.214</td><td>38.201</td><td>171.617</td><td>43.851</td><td>0.571</td><td>44.942</td></tr>
+          <tr><td>HaWoR</td><td>0.348</td><td>0.499</td><td>0.654</td><td>71.396</td><td>66.031</td><td>327.294</td><td>79.350</td><td>0.262</td><td>23.872</td></tr>
+          <tr><td>OmniHands</td><td>0.649</td><td>0.895</td><td>0.868</td><td>63.281</td><td>22.682</td><td>68.437</td><td>49.120</td><td>0.133</td><td>69.510</td></tr>
+          <tr class="ours-row"><td><strong>ViDiHand (Ours)</strong></td><td class="best">0.948</td><td class="best">0.974</td><td class="best">0.983</td><td class="best">21.514</td><td class="best">11.383</td><td class="best">14.953</td><td class="best">15.829</td><td class="best">0.040</td><td class="best">3.741</td></tr>
+          <!-- HOI4D -->
+          <tr class="block-sep"><td class="dataset-label" rowspan="9">HOI4D</td>
+            <td>InterWild</td><td>0.731</td><td>0.922</td><td>0.864</td><td>53.072</td><td>22.909</td><td>80.549</td><td>41.743</td><td>0.228</td><td>98.866</td></tr>
+          <tr><td>HaMeR</td><td>0.731</td><td>0.923</td><td>0.864</td><td>44.481</td><td>21.580</td><td>79.494</td><td>33.557</td><td>0.187</td><td>20.068</td></tr>
+          <tr><td>Hamba</td><td>0.710</td><td>0.885</td><td>0.849</td><td>47.161</td><td>25.924</td><td>115.793</td><td>37.390</td><td>0.204</td><td>21.556</td></tr>
+          <tr><td>WildHands</td><td>0.730</td><td>0.924</td><td>0.864</td><td>45.623</td><td>23.601</td><td>82.246</td><td>45.654</td><td>0.159</td><td>18.615</td></tr>
+          <tr><td>WiLoR</td><td>0.962</td><td>0.966</td><td>0.972</td><td>33.710</td><td>14.903</td><td>41.579</td><td>25.527</td><td>0.115</td><td>17.449</td></tr>
+          <tr><td>Dyn-HaMR</td><td>0.750</td><td>0.863</td><td>0.845</td><td>45.097</td><td>29.259</td><td>144.643</td><td>40.176</td><td>0.258</td><td>17.947</td></tr>
+          <tr><td>HaWoR</td><td>0.869</td><td>0.864</td><td>0.919</td><td>47.329</td><td>28.851</td><td>135.748</td><td>43.091</td><td>0.139</td><td>28.376</td></tr>
+          <tr><td>OmniHands</td><td>0.655</td><td>0.937</td><td>0.834</td><td>44.255</td><td>18.689</td><td>70.662</td><td>34.392</td><td class="best">0.108</td><td>24.212</td></tr>
+          <tr class="ours-row"><td><strong>ViDiHand (Ours)</strong></td><td class="best">0.984</td><td class="best">0.991</td><td class="best">0.990</td><td class="best">30.090</td><td class="best">13.960</td><td class="best">24.460</td><td class="best">23.420</td><td>0.117</td><td class="best">4.010</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="container" id="citation">
+    <h2 class="section-title">Citation</h2>
+    <p class="section-desc">If you find ViDiHand useful for your research, please consider citing our paper.</p>
+    <div class="panel citation-panel">
+      <button class="copy-btn" onclick="copyBibtex(this)">Copy</button>
+      <pre id="bibtex">@misc{wang2026surprisingeffectivenessvideodiffusion,
+      title={The Surprising Effectiveness of Video Diffusion Models for Hand Motion Reconstruction},
+      author={Yuxi Wang and Chengkai Jin and Yufei Liu and Wenqi Ouyang and Tianyi Wei and Zhiwei Zeng and Siyuan Huang and Zhiqi Shen and Xingang Pan},
+      year={2026},
+      eprint={2606.30308},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2606.30308},
+}</pre>
+    </div>
+  </section>
+
+  <footer>
+    <a href="#citation">Citation / BibTeX</a> · <a href="https://arxiv.org/abs/2606.30308" target="_blank" rel="noopener">ArXiv</a> · <a href="https://github.com/NTUYWANG103/ViDiHand" target="_blank" rel="noopener">Code</a>
+  </footer>
+
+  <script>
+    function copyBibtex(btn) {
+      const text = document.getElementById("bibtex").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = "Copy"; }, 1600);
+      });
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    (function() {
+      const metrics = ["MPJPE-p\n(3D Pose)", "PA-MPJPE-p\n(3D Pose)", "GO-p\n(Orient.)",
+                       "CT-p\n(Camera)", "EPE-p\n(2D Pos.)", "F1\n(Detection)",
+                       "FAcc\n(Det. Frame)", "Jitter\n(Temporal)"];
+      const lowerBetter = [true, true, true, true, true, false, false, true];
+      const raw = {
+        "HaMeR":     [29.197, 14.596, 24.907, 0.095, 65.289, 0.957, 0.875, 18.279],
+        "WiLoR":     [22.012, 11.873, 17.358, 0.075, 71.527, 0.974, 0.919, 24.091],
+        "HaWoR":     [45.357, 26.375, 43.325, 0.149, 158.062, 0.895, 0.700, 19.789],
+        "Dyn-HaMR":  [27.904, 17.017, 25.951, 0.121, 85.723, 0.951, 0.842, 12.840],
+        "InterWild": [30.817, 15.952, 25.386, 0.097, 53.888, 0.959, 0.878, 46.577],
+        "WildHands": [25.704, 13.941, 22.320, 0.058, 50.517, 0.960, 0.879, 12.972],
+        "OmniHands": [29.674, 14.203, 24.580, 0.087, 51.505, 0.954, 0.866, 45.312],
+        "Hamba":     [31.233, 17.168, 27.822, 0.110, 87.047, 0.941, 0.833, 15.357],
+        "ViDiHand (Ours)": [21.668, 9.821, 14.642, 0.047, 12.407, 0.999, 0.997, 3.183],
+      };
+      const names = Object.keys(raw);
+      const allVals = names.map(n => raw[n]);
+      const nM = metrics.length;
+      const worst = [], best = [];
+      for (let i = 0; i < nM; i++) {
+        const col = allVals.map(r => r[i]);
+        if (lowerBetter[i]) { worst.push(Math.max(...col)); best.push(Math.min(...col)); }
+        else { worst.push(Math.min(...col)); best.push(Math.max(...col)); }
+      }
+      const normalized = {};
+      const FLOOR = 0.15;
+      for (const [name, vals] of Object.entries(raw)) {
+        normalized[name] = vals.map((v, i) => {
+          if (worst[i] === best[i]) return 1;
+          const s = lowerBetter[i] ? (worst[i] - v) / (worst[i] - best[i]) : (v - worst[i]) / (best[i] - worst[i]);
+          const clamped = Math.max(0, Math.min(1, s));
+          return FLOOR + (1 - FLOOR) * clamped;
+        });
+      }
+      const colors = {
+        "ViDiHand (Ours)": {border:"#34c78e", bg:"rgba(52,199,142,0.28)"},
+        "HaMeR":     {border:"#e06469", bg:"rgba(224,100,105,0.18)"},
+        "WiLoR":     {border:"#5b9bd5", bg:"rgba(91,155,213,0.18)"},
+        "HaWoR":     {border:"#f4a261", bg:"rgba(244,162,97,0.18)"},
+        "Dyn-HaMR":  {border:"#9b6bc4", bg:"rgba(155,107,196,0.18)"},
+        "InterWild": {border:"#e8b84b", bg:"rgba(232,184,75,0.18)"},
+        "WildHands": {border:"#d4627a", bg:"rgba(212,98,122,0.18)"},
+        "OmniHands": {border:"#4db8a4", bg:"rgba(77,184,164,0.18)"},
+        "Hamba":     {border:"#29b6f6", bg:"rgba(41,182,246,0.18)"},
+      };
+      const plotOrder = ["HaMeR","HaWoR","Dyn-HaMR","Hamba","InterWild","OmniHands","WildHands","WiLoR","ViDiHand (Ours)"];
+
+      const legendList = document.getElementById("radarLegendList");
+      const legendItems = {};
+      plotOrder.forEach(name => {
+        const item = document.createElement("div");
+        item.style.cssText = "display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;transition:all 0.3s;border:2px solid transparent;";
+        const dot = document.createElement("span");
+        dot.style.cssText = "width:10px;height:10px;border-radius:50%;flex-shrink:0;background:" + colors[name].border + ";";
+        const label = document.createElement("span");
+        label.style.cssText = "font-size:0.82rem;color:#64748b;white-space:nowrap;transition:all 0.3s;";
+        label.textContent = name;
+        item.appendChild(dot);
+        item.appendChild(label);
+        legendList.appendChild(item);
+        legendItems[name] = { item, dot, label };
+      });
+
+      const datasets = plotOrder.map(name => ({
+        label: name,
+        data: new Array(nM).fill(0),
+        borderColor: colors[name].border,
+        backgroundColor: "transparent",
+        borderWidth: name === "ViDiHand (Ours)" ? 2 : 1.5,
+        pointRadius: name === "ViDiHand (Ours)" ? 5 : 3,
+        pointHoverRadius: 7,
+        hidden: true,
+      }));
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      const chart = new Chart(ctx, {
+        type: "radar",
+        data: { labels: metrics, datasets },
+        options: {
+          responsive: true,
+          animation: { duration: 600, easing: "easeOutCubic" },
+          scales: {
+            r: {
+              min: 0, max: 1,
+              ticks: { stepSize: 0.2, color: "#aaa", backdropColor: "transparent", font: {size: 11} },
+              grid: { color: "#e0e0e0" },
+              angleLines: { color: "#e0e0e0" },
+              pointLabels: { font: {size: 12, weight: "bold"}, color: "#333" }
+            }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(c) {
+                  const name = c.dataset.label;
+                  const idx = c.dataIndex;
+                  const rawVal = raw[name][idx];
+                  const normVal = c.parsed.r.toFixed(3);
+                  return name + ": " + rawVal + " (norm: " + normVal + ")";
+                }
+              }
+            }
+          }
+        }
+      });
+
+      let animStep = 0;
+      let animStarted = false;
+      const DELAY_PER_METHOD = 700;
+      const PAUSE_BEFORE_LOOP = 3000;
+
+      function highlightLegend(activeIdx) {
+        plotOrder.forEach((name, idx) => {
+          const li = legendItems[name];
+          if (idx <= activeIdx) {
+            li.item.style.background = idx === activeIdx ? colors[name].border + "18" : "transparent";
+            li.item.style.borderColor = idx === activeIdx ? colors[name].border : "transparent";
+            li.label.style.color = idx === activeIdx ? colors[name].border : "#334155";
+            li.label.style.fontWeight = idx === activeIdx ? "800" : "400";
+          } else {
+            li.item.style.background = "transparent";
+            li.item.style.borderColor = "transparent";
+            li.label.style.color = "#64748b";
+            li.label.style.fontWeight = "400";
+          }
+        });
+      }
+
+      function revealNext() {
+        if (animStep < plotOrder.length) {
+          const idx = animStep;
+          const name = plotOrder[idx];
+          chart.data.datasets[idx].data = normalized[name];
+          chart.data.datasets[idx].hidden = false;
+          chart.data.datasets[idx].backgroundColor = colors[name].bg;
+          highlightLegend(idx);
+          chart.update();
+          animStep++;
+          setTimeout(revealNext, DELAY_PER_METHOD);
+        } else {
+          setTimeout(resetAndReplay, PAUSE_BEFORE_LOOP);
+        }
+      }
+
+      function resetAndReplay() {
+        plotOrder.forEach((name, idx) => {
+          chart.data.datasets[idx].data = new Array(nM).fill(0);
+          chart.data.datasets[idx].hidden = true;
+          chart.data.datasets[idx].backgroundColor = "transparent";
+          legendItems[name].item.style.background = "transparent";
+          legendItems[name].item.style.borderColor = "transparent";
+          legendItems[name].label.style.color = "#64748b";
+          legendItems[name].label.style.fontWeight = "400";
+        });
+        chart.update("none");
+        animStep = 0;
+        setTimeout(revealNext, 400);
+      }
+
+      const radarSection = document.getElementById("radar");
+      const radarObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !animStarted) {
+            animStarted = true;
+            setTimeout(revealNext, 500);
+          }
+        });
+      }, { threshold: 0.3 });
+      radarObserver.observe(radarSection);
+    })();
+  </script>
+  <script>
+    const caseData = {
+      case01: {
+        title: "Hot3D · case 01",
+        source: "assets/datasets/Hot3D/case 01/P0001_83b755aa_seg_018_source.mp4",
+        joint: "assets/datasets/Hot3D/case 01/P0001_83b755aa_seg_018_joint.mp4",
+        mesh: "assets/datasets/Hot3D/case 01/P0001_83b755aa_seg_018_mesh.mp4",
+        d3a: "assets/datasets/Hot3D/case 01/P0001_83b755aa_seg_018_3D_A.mp4",
+        d3b: "assets/datasets/Hot3D/case 01/P0001_83b755aa_seg_018_3D_B.mp4",
+        d3c: "assets/datasets/Hot3D/case 01/P0001_83b755aa_seg_018_3D_C.mp4"
+      },
+      case02: {
+        title: "Hot3D · case 02",
+        source: "assets/datasets/Hot3D/case 02/P0001_95eabc0a_seg_042_source.mp4",
+        joint: "assets/datasets/Hot3D/case 02/P0001_95eabc0a_seg_042_joint.mp4",
+        mesh: "assets/datasets/Hot3D/case 02/P0001_95eabc0a_seg_042_mesh.mp4",
+        d3a: "assets/datasets/Hot3D/case 02/P0001_95eabc0a_seg_042_3D_A.mp4",
+        d3b: "assets/datasets/Hot3D/case 02/P0001_95eabc0a_seg_042_3D_B.mp4",
+        d3c: "assets/datasets/Hot3D/case 02/P0001_95eabc0a_seg_042_3D_C.mp4"
+      },
+      case03: {
+        title: "Hot3D · case 03",
+        source: "assets/datasets/Hot3D/case 03/P0001_95eabcOa_seg_011_source.mp4",
+        joint: "assets/datasets/Hot3D/case 03/P0001_95eabcOa_seg_011_joint.mp4",
+        mesh: "assets/datasets/Hot3D/case 03/P0001_95eabcOa_seg_011_mesh.mp4",
+        d3a: "assets/datasets/Hot3D/case 03/P0001_95eabcOa_seg_011_3D_A.mp4",
+        d3b: "assets/datasets/Hot3D/case 03/P0001_95eabcOa_seg_011_3D_B.mp4",
+        d3c: "assets/datasets/Hot3D/case 03/P0001_95eabcOa_seg_011_3D_C.mp4"
+      },
+      case04: {
+        title: "Hot3D · case 04",
+        source: "assets/datasets/Hot3D/case 04/P0011_0c2d00ed_seg_018_source.mp4",
+        joint: "assets/datasets/Hot3D/case 04/P0011_0c2d00ed_seg_018_joint.mp4",
+        mesh: "assets/datasets/Hot3D/case 04/P0011_0c2d00ed_seg_018_mesh.mp4",
+        d3a: "assets/datasets/Hot3D/case 04/P0011_0c2d00ed_seg_018_3D_A.mp4",
+        d3b: "assets/datasets/Hot3D/case 04/P0011_0c2d00ed_seg_018_3D_B.mp4",
+        d3c: "assets/datasets/Hot3D/case 04/P0011_0c2d00ed_seg_018_3D_C.mp4"
+      },
+      case05: {
+        title: "Hoi4D · case 01",
+        source: "assets/datasets/Hoi4D/case 01/ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001_source.mp4",
+        joint: "assets/datasets/Hoi4D/case 01/ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001_joint.mp4",
+        mesh: "assets/datasets/Hoi4D/case 01/ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001_mesh.mp4",
+        d3a: "assets/datasets/Hoi4D/case 01/ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001_3D_A.mp4",
+        d3b: "assets/datasets/Hoi4D/case 01/ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001_3D_B.mp4",
+        d3c: "assets/datasets/Hoi4D/case 01/ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001_3D_C.mp4"
+      },
+      case06: {
+        title: "In the Wild · OakInk",
+        source: "assets/datasets/Oakink/case 01/oakink_source.mp4",
+        joint: "assets/datasets/Oakink/case 01/oakink_joint.mp4",
+        mesh: "assets/datasets/Oakink/case 01/oakink_mesh.mp4",
+        d3a: "assets/datasets/Oakink/case 01/oakink_3D_A.mp4",
+        d3b: "assets/datasets/Oakink/case 01/oakink_3D_B.mp4",
+        d3c: "assets/datasets/Oakink/case 01/oakink_3D_C.mp4"
+      },
+      case07: {
+        title: "In the Wild · Ropedia",
+        source: "assets/datasets/Ropedia/case 01/ropedia_source.mp4",
+        joint: "assets/datasets/Ropedia/case 01/ropedia_joint.mp4",
+        mesh: "assets/datasets/Ropedia/case 01/ropedia_mesh.mp4",
+        d3a: "assets/datasets/Ropedia/case 01/ropedia_3D_A.mp4",
+        d3b: "assets/datasets/Ropedia/case 01/ropedia_3D_B.mp4",
+        d3c: "assets/datasets/Ropedia/case 01/ropedia_3D_C.mp4"
+      },
+      case08: {
+        title: "Arctic · box grab",
+        source: "assets/datasets/Arctic/case 01/s05_box_grab_01_0_seg_003_source.mp4",
+        joint: "assets/datasets/Arctic/case 01/s05_box_grab_01_0_seg_003_joint.mp4",
+        mesh: "assets/datasets/Arctic/case 01/s05_box_grab_01_0_seg_003_mesh.mp4",
+        d3a: "assets/datasets/Arctic/case 01/s05_box_grab_01_0_seg_003_3D_A.mp4",
+        d3b: "assets/datasets/Arctic/case 01/s05_box_grab_01_0_seg_003_3D_B.mp4",
+        d3c: "assets/datasets/Arctic/case 01/s05_box_grab_01_0_seg_003_3D_C.mp4"
+      },
+      case09: {
+        title: "Arctic · box use",
+        source: "assets/datasets/Arctic/case 02/s05_box_use_01_0_seg_002_source.mp4",
+        joint: "assets/datasets/Arctic/case 02/s05_box_use_01_0_seg_002_joint.mp4",
+        mesh: "assets/datasets/Arctic/case 02/s05_box_use_01_0_seg_002_mesh.mp4",
+        d3a: "assets/datasets/Arctic/case 02/s05_box_use_01_0_seg_002_3D_A.mp4",
+        d3b: "assets/datasets/Arctic/case 02/s05_box_use_01_0_seg_002_3D_B.mp4",
+        d3c: "assets/datasets/Arctic/case 02/s05_box_use_01_0_seg_002_3D_C.mp4"
+      },
+      case10: {
+        title: "Arctic · notebook",
+        source: "assets/datasets/Arctic/case 03/s05_notebook_grab_01_0_seg_002_source.mp4",
+        joint: "assets/datasets/Arctic/case 03/s05_notebook_grab_01_0_seg_002_joint.mp4",
+        mesh: "assets/datasets/Arctic/case 03/s05_notebook_grab_01_0_seg_002_mesh.mp4",
+        d3a: "assets/datasets/Arctic/case 03/s05_notebook_grab_01_0_seg_002_3D_A.mp4",
+        d3b: "assets/datasets/Arctic/case 03/s05_notebook_grab_01_0_seg_002_3D_B.mp4",
+        d3c: "assets/datasets/Arctic/case 03/s05_notebook_grab_01_0_seg_002_3D_C.mp4"
+      }
+    };
+
+    const strip = document.getElementById("caseStrip");
+    const viewport = document.getElementById("caseViewport");
+    const prevBtn = document.getElementById("casePrev");
+    const nextBtn = document.getElementById("caseNext");
+    const buttons = Array.from(strip.querySelectorAll(".case-button"));
+    const title = document.getElementById("reconTitle");
+    const CASE_SLIDE_DURATION = 350;
+    let trackIndex = 0;
+
+    const players = {
+      source: document.getElementById("viewSource"),
+      joint: document.getElementById("viewJoint"),
+      mesh: document.getElementById("viewMesh"),
+      d3a: document.getElementById("view3DA"),
+      d3b: document.getElementById("view3DB"),
+      d3c: document.getElementById("view3DC")
+    };
+
+    function updateTrackPosition() {
+      const card = buttons[0];
+      if (!card) return;
+      const style = window.getComputedStyle(strip);
+      const gap = parseFloat(style.columnGap || style.gap || "0");
+      const step = card.getBoundingClientRect().width + gap;
+      strip.style.transform = `translateX(${-trackIndex * step}px)`;
+    }
+
+    function visibleCount() {
+      if (window.innerWidth <= 640) return 2;
+      if (window.innerWidth <= 980) return 3;
+      return 5;
+    }
+
+    function maxTrackIndex() {
+      return Math.max(0, buttons.length - visibleCount());
+    }
+
+    function moveTrack(delta) {
+      trackIndex = trackIndex + delta;
+      if (trackIndex < 0) trackIndex = buttons.length - visibleCount();
+      if (trackIndex > buttons.length - visibleCount()) trackIndex = 0;
+      strip.style.transition = `transform ${CASE_SLIDE_DURATION}ms ease`;
+      updateTrackPosition();
+    }
+
+    function setVideo(video, src) {
+      if (video.getAttribute("src") === src) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        video.addEventListener("loadedmetadata", resolve, { once: true });
+        video.addEventListener("error", reject, { once: true });
+        video.setAttribute("src", src);
+        video.preload = "metadata";
+        video.load();
+      }).then(() => {
+        video.currentTime = 0.001;
+      });
+    }
+
+    function syncPlay() {
+      const vids = Object.values(players);
+      vids.forEach(v => { v.pause(); v.currentTime = 0; });
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          vids.forEach(v => {
+            const p = v.play();
+            if (p && typeof p.catch === "function") p.catch(() => { v.currentTime = 0.001; });
+          });
+        });
+      });
+    }
+    window.gallerySyncPlay = syncPlay;
+
+    async function activateCase(caseId) {
+      const data = caseData[caseId];
+      if (!data) return;
+
+      title.textContent = data.title;
+      if (window.cmpSetCase) window.cmpSetCase(caseId);
+
+      buttons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.case === caseId);
+      });
+
+      await Promise.all([
+        setVideo(players.source, data.source),
+        setVideo(players.joint, data.joint),
+        setVideo(players.mesh, data.mesh),
+        setVideo(players.d3a, data.d3a),
+        setVideo(players.d3b, data.d3b),
+        setVideo(players.d3c, data.d3c)
+      ]).catch(() => {});
+      await Promise.all(Object.values(players).map(v =>
+        v.readyState >= 3 ? Promise.resolve() :
+        new Promise(res => v.addEventListener("canplay", res, { once: true }))
+      )).catch(() => {});
+      syncPlay();
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => activateCase(btn.dataset.case));
+    });
+
+    prevBtn.addEventListener("click", () => moveTrack(-1));
+    nextBtn.addEventListener("click", () => moveTrack(1));
+
+    window.addEventListener("resize", () => {
+      const max = maxTrackIndex();
+      if (trackIndex > max) trackIndex = max;
+      updateTrackPosition();
+    });
+
+    window.addEventListener("load", () => {
+      strip.style.transition = `transform ${CASE_SLIDE_DURATION}ms ease`;
+      updateTrackPosition();
+
+      // preload case01 first frames without playing
+      const first = caseData["case01"];
+      Promise.all([
+        setVideo(players.source, first.source),
+        setVideo(players.joint, first.joint),
+        setVideo(players.mesh, first.mesh),
+        setVideo(players.d3a, first.d3a),
+        setVideo(players.d3b, first.d3b),
+        setVideo(players.d3c, first.d3c)
+      ]).catch(() => {});
+
+      // ── Scroll fade-in (repeats every time) ──
+      const revealEls = document.querySelectorAll("section, .hero-video, footer");
+      revealEls.forEach(el => el.classList.add("reveal"));
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+          } else {
+            e.target.classList.remove("visible");
+          }
+        });
+      }, { threshold: 0.08 });
+      revealEls.forEach(el => observer.observe(el));
+
+      // ── Number counter for quant table (repeats every time) ──
+      const rawValues = new Map();
+      const quantTable = document.querySelector(".quant-table");
+      if (quantTable) {
+        quantTable.querySelectorAll("td:not(.dataset-label)").forEach(td => {
+          const val = parseFloat(td.textContent);
+          if (!isNaN(val)) rawValues.set(td, val);
+        });
+      }
+      const tableObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          rawValues.forEach((val, td) => {
+            const duration = 900;
+            const start = performance.now();
+            const animate = (now) => {
+              const t = Math.min((now - start) / duration, 1);
+              const ease = 1 - Math.pow(1 - t, 3);
+              td.textContent = (val * ease).toFixed(3);
+              if (t < 1) requestAnimationFrame(animate);
+              else td.textContent = val.toFixed(3);
+            };
+            requestAnimationFrame(animate);
+          });
+        });
+      }, { threshold: 0.2 });
+      if (quantTable) tableObserver.observe(quantTable);
+    });
+  </script>
+  <script>
+  (function() {
+    const cmpCaseLookup = {
+      case01: { dataset: "Hot3D", dir: "case 01", prefix: "P0001_83b755aa_seg_018" },
+      case02: { dataset: "Hot3D", dir: "case 02", prefix: "P0001_95eabc0a_seg_042" },
+      case03: { dataset: "Hot3D", dir: "case 03", prefix: "P0001_95eabcOa_seg_011" },
+      case04: { dataset: "Hot3D", dir: "case 04", prefix: "P0011_0c2d00ed_seg_018" },
+      case05: { dataset: "Hoi4D", dir: "case 01", prefix: "ZY20210800001_H1_C14_N37_S333_s03_T2_seg_001" },
+      case06: { dataset: "Oakink", dir: "case 01", prefix: "oakink" },
+      case07: { dataset: "Ropedia", dir: "case 01", prefix: "ropedia" },
+      case08: { dataset: "Arctic", dir: "case 01", prefix: "s05_box_grab_01_0_seg_003" },
+      case09: { dataset: "Arctic", dir: "case 02", prefix: "s05_box_use_01_0_seg_002" },
+      case10: { dataset: "Arctic", dir: "case 03", prefix: "s05_notebook_grab_01_0_seg_002" },
+    };
+
+    const methods = [
+      { key: "ours", label: "ViDiHand (Ours)", always: true },
+      { key: "hamer", label: "HaMeR" },
+      { key: "hamba", label: "Hamba" },
+      { key: "wildhands", label: "WildHands" },
+      { key: "wilor", label: "WiLoR" },
+      { key: "dynhamr", label: "Dyn-HaMR" },
+      { key: "hawor", label: "HaWoR" },
+      { key: "omnihands_fix", label: "OmniHands" },
+      { key: "interwild", label: "InterWild" },
+    ];
+
+    const vizTypes = [
+      { key: "joint", label: "Joint" },
+      { key: "mesh", label: "Mesh" },
+      { key: "3D_A", label: "3D Ego" },
+      { key: "3D_B", label: "3D Front" },
+      { key: "3D_C", label: "3D Master" },
+    ];
+
+    let currentCaseId = "case01";
+    let selectedMethods = new Set(["ours", "hamer", "hamba", "wildhands", "wilor", "dynhamr", "hawor"]);
+    let activeViz = vizTypes[0];
+
+    const panelOurs = document.getElementById("panelOurs");
+    const panelCompare = document.getElementById("panelCompare");
+    const methodRowEl = document.getElementById("cmpMethodRow");
+    const vizTabsEl = document.getElementById("cmpVizTabs");
+    const gridEl = document.getElementById("cmpGrid");
+
+    // Panel switch logic
+    document.getElementById("panelSwitch").addEventListener("click", (e) => {
+      const btn = e.target.closest(".panel-switch-btn");
+      if (!btn) return;
+      document.querySelectorAll(".panel-switch-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      if (btn.dataset.panel === "ours") {
+        panelOurs.style.display = "";
+        panelCompare.style.display = "none";
+        if (window.gallerySyncPlay) window.gallerySyncPlay();
+      } else {
+        panelOurs.style.display = "none";
+        panelCompare.style.display = "";
+        renderGrid();
+      }
+    });
+
+    // Build method chips
+    methods.forEach(m => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      if (m.always) {
+        btn.className = "cmp-method-chip ours";
+      } else {
+        btn.className = "cmp-method-chip" + (selectedMethods.has(m.key) ? " selected" : "");
+      }
+      btn.textContent = m.label;
+      btn.addEventListener("click", () => {
+        if (m.always) return;
+        if (selectedMethods.has(m.key)) {
+          selectedMethods.delete(m.key);
+          btn.classList.remove("selected");
+        } else {
+          selectedMethods.add(m.key);
+          btn.classList.add("selected");
+        }
+        renderGrid();
+      });
+      methodRowEl.appendChild(btn);
+    });
+
+    // Build viz tabs
+    vizTypes.forEach(v => {
+      const btn = document.createElement("button");
+      btn.className = "cmp-viz-tab" + (v === activeViz ? " active" : "");
+      btn.textContent = v.label;
+      btn.type = "button";
+      btn.addEventListener("click", () => {
+        activeViz = v;
+        vizTabsEl.querySelectorAll(".cmp-viz-tab").forEach(t => t.classList.remove("active"));
+        btn.classList.add("active");
+        renderGrid();
+      });
+      vizTabsEl.appendChild(btn);
+    });
+
+    function getVideoSrc(methodKey, vizKey) {
+      const c = cmpCaseLookup[currentCaseId];
+      if (methodKey === "ours") {
+        return "assets/datasets/" + c.dataset + "/" + c.dir + "/" + c.prefix + "_" + vizKey + ".mp4";
+      }
+      return "assets/compare/" + c.dataset + "/" + c.dir + "/" + methodKey + "/visual_" + vizKey + ".mp4";
+    }
+
+    function getSourceSrc() {
+      const c = cmpCaseLookup[currentCaseId];
+      return "assets/datasets/" + c.dataset + "/" + c.dir + "/" + c.prefix + "_source.mp4";
+    }
+
+    function renderGrid() {
+      gridEl.innerHTML = "";
+      const vids = [];
+
+      // Source video card
+      const srcCard = document.createElement("div");
+      srcCard.className = "cmp-card source-card";
+      const srcVideo = document.createElement("video");
+      srcVideo.muted = true;
+      srcVideo.loop = true;
+      srcVideo.playsInline = true;
+      srcVideo.preload = "metadata";
+      srcVideo.src = getSourceSrc();
+      srcCard.appendChild(srcVideo);
+      const srcLabel = document.createElement("div");
+      srcLabel.className = "cmp-card-label";
+      srcLabel.textContent = "Source (Input)";
+      srcCard.appendChild(srcLabel);
+      gridEl.appendChild(srcCard);
+      vids.push(srcVideo);
+
+      // Method cards
+      const showMethods = methods.filter(m => selectedMethods.has(m.key));
+      showMethods.forEach(m => {
+        const card = document.createElement("div");
+        card.className = "cmp-card" + (m.always ? " ours-card" : "");
+        const video = document.createElement("video");
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = "metadata";
+        video.src = getVideoSrc(m.key, activeViz.key);
+        card.appendChild(video);
+        const label = document.createElement("div");
+        label.className = "cmp-card-label";
+        label.textContent = m.label;
+        card.appendChild(label);
+        gridEl.appendChild(card);
+        vids.push(video);
+      });
+
+      Promise.all(vids.map(v => new Promise(res => {
+        if (v.readyState >= 2) { res(); return; }
+        v.addEventListener("loadeddata", res, { once: true });
+        v.addEventListener("error", res, { once: true });
+      }))).then(() => {
+        vids.forEach(v => { v.currentTime = 0; });
+        requestAnimationFrame(() => {
+          vids.forEach(v => {
+            const p = v.play();
+            if (p && typeof p.catch === "function") p.catch(() => {});
+          });
+        });
+      });
+    }
+
+    // Expose a hook for the gallery's activateCase to call
+    window.cmpSetCase = function(caseId) {
+      currentCaseId = caseId;
+      if (panelCompare.style.display !== "none") {
+        renderGrid();
+      }
+    };
+  })();
+  </script>
+</body>
+</html>
