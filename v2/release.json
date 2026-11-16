@@ -1,6 +1,6 @@
 {
-  "version": 38,
-  "presentation": "interactive raw/result only",
+  "version": 39,
+  "presentation": "inline image-frame comparison; no video element or MP4 dependency",
   "datasets": [
     {
       "key": "wild1",
@@ -12,7 +12,24 @@
       "label": "Xperience",
       "width": 480,
       "height": 480,
-      "sha256": "f9b367e06f0147240b5b9fa2dcef10463c9df6c75c9675ef9e4692a3521febbc"
+      "sheets": [
+        "wild1-frames-0.webp",
+        "wild1-frames-1.webp",
+        "wild1-frames-2.webp",
+        "wild1-frames-3.webp",
+        "wild1-frames-4.webp",
+        "wild1-frames-5.webp"
+      ],
+      "frames": 120,
+      "columns": 5,
+      "sheet_sha256": {
+        "wild1-frames-0.webp": "1589e626586a8138d2c864c2af3a2081c0da3f9393fddf93dd7d78ea0dcc8ded",
+        "wild1-frames-1.webp": "a2088f1bfdd2cac6e61e817c881c996a65d56cee1a5419fa555b18ba2f493ae9",
+        "wild1-frames-2.webp": "a5504d05ce84ef7751cabc56c6ff0bd25447fa559325a87aeffeef0fce3b50d7",
+        "wild1-frames-3.webp": "469740273c0718f2c1ae3c77f331707a8c5f6473c0eafd6879f2d1af449b1c72",
+        "wild1-frames-4.webp": "864fdf0e793a28b740299277ceb7c32e283a67a835405b336d1f220f7ffc83d9",
+        "wild1-frames-5.webp": "044d9465c2f78e5eaf33de801532cf5be136c2d8b4f4cea6b40a41e48db23d7b"
+      }
     },
     {
       "key": "wild2",
@@ -24,7 +41,24 @@
       "label": "EgoDex",
       "width": 832,
       "height": 480,
-      "sha256": "f0dd56b0fab58f3217fa6ae8fef5e880194d6fa5e341794c68aa59deececd33b"
+      "sheets": [
+        "wild2-frames-0.webp",
+        "wild2-frames-1.webp",
+        "wild2-frames-2.webp",
+        "wild2-frames-3.webp",
+        "wild2-frames-4.webp",
+        "wild2-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "wild2-frames-0.webp": "c3bd27384b6ee94399a386f58b2233b8cf0555d4617af225a2e2b96e975d17b4",
+        "wild2-frames-1.webp": "772e080895a3fba3d16a21461f13b6d362b6e3ac0d0adad0349a31f0c90d4302",
+        "wild2-frames-2.webp": "d449e053958b4c079f1ada051101e20efdc848d0bfe5a20c98c143bafc58a194",
+        "wild2-frames-3.webp": "4e84b40ca5f4e57eca15406532eb3ceb5e60ef165838e17553be3cbc5bbb8120",
+        "wild2-frames-4.webp": "eb93b355bfea33673fb5dd35ec2d0779ff35f5c513be943526fed2d699cf1215",
+        "wild2-frames-5.webp": "9cba6524442d6dbc728463fe6436a9414fad699fd9d08c0bcc581026654511b7"
+      }
     },
     {
       "key": "wild8",
@@ -36,7 +70,24 @@
       "label": "Ego4D",
       "width": 640,
       "height": 480,
-      "sha256": "5a5f5baf0da1bb69f57aec11fc9fb16fc6e2e03eb2013a24b98dcfe2492ac95a"
+      "sheets": [
+        "wild8-frames-0.webp",
+        "wild8-frames-1.webp",
+        "wild8-frames-2.webp",
+        "wild8-frames-3.webp",
+        "wild8-frames-4.webp",
+        "wild8-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "wild8-frames-0.webp": "a16870e401aaa7c728a2bd6a10d9082e6f6065e307169f7b29eb3cf188b75c21",
+        "wild8-frames-1.webp": "7e97b8946a501c6247bce580ea250d9c31f03d6371152d15b2bd8c7585dfaea6",
+        "wild8-frames-2.webp": "a34ec55b4ccf93aad341186ad954c80e4d216265bc7b9e265b4dfa078c30670c",
+        "wild8-frames-3.webp": "04cdaee2d7b4876dd5fbd6f69edff62641b8e3b5f0a0f94e864ebf7acf673c94",
+        "wild8-frames-4.webp": "bf4130468785a21ba021d369924534f7ba1efc1b6760e8463c5f1a9bad067634",
+        "wild8-frames-5.webp": "f8062a342afd855a01ef9fcef93b19decc6143213b2dedcc217c5c559863d9da"
+      }
     },
     {
       "key": "paper2",
@@ -48,7 +99,24 @@
       "label": "Gen-HumanEgo",
       "width": 576,
       "height": 480,
-      "sha256": "bc02d1f122a8a2a17881473b9cb14e6b110910b42e1c715767f29dcf3bb57482"
+      "sheets": [
+        "paper2-frames-0.webp",
+        "paper2-frames-1.webp",
+        "paper2-frames-2.webp",
+        "paper2-frames-3.webp",
+        "paper2-frames-4.webp",
+        "paper2-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "paper2-frames-0.webp": "6cf8a9a2ad1f96dcc5af828b4e9d883906d46c707d0d23ff7603e8ceb060f467",
+        "paper2-frames-1.webp": "8f074f56de196369f723eb482fc2e6b347f4b70477ecfc9d1ce9a743e34beecf",
+        "paper2-frames-2.webp": "2f6180f202f53ef9b96db5c99282eae430f252ba9f4330fccc5be871260c41db",
+        "paper2-frames-3.webp": "1e481303e96fe51b4b15fa333b600a0a144e8a8d2fb9cd1b9a5d23672ece50bc",
+        "paper2-frames-4.webp": "bba1e61d9e834fd216c0151838a0ec9a6e816632133ba5c711ed5653f37f7f1f",
+        "paper2-frames-5.webp": "511bf5f72f2e8621e3d7e54decef31636af314d1da99c9439f41678b1db8d3b7"
+      }
     },
     {
       "key": "arctic",
@@ -60,7 +128,24 @@
       "duration": 6,
       "width": 672,
       "height": 480,
-      "sha256": "e0c7d99b1203a268463aed0a4ed818bfd26ed2b37e30a2dc8d79b4f56080ef45"
+      "sheets": [
+        "arctic-frames-0.webp",
+        "arctic-frames-1.webp",
+        "arctic-frames-2.webp",
+        "arctic-frames-3.webp",
+        "arctic-frames-4.webp",
+        "arctic-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "arctic-frames-0.webp": "2ca3e88aa2363f0edef887d215f6a66d77fa6336af0724e0d04a4735cadf0ecb",
+        "arctic-frames-1.webp": "97c6ac799b8777a72b349986d874486ad7b51a01e634f374adeb5535d2b0217a",
+        "arctic-frames-2.webp": "be85b3e2b34f9f545bdcd26600d0bd9f38ffbad9a50eb69c5336a028710c9ccb",
+        "arctic-frames-3.webp": "b86b0839fdb0698582dedcba6114c112e6441b896280deb4955a94d37e39e794",
+        "arctic-frames-4.webp": "42feec83234f6b09956574327fa665e0495cae7e833f61cbcd5ddba81b6e5caf",
+        "arctic-frames-5.webp": "9cf65ed8791b9b994b3e176989ec383bd8dfb29747a303d5f7c707b294115c46"
+      }
     },
     {
       "key": "h2o",
@@ -72,7 +157,24 @@
       "duration": 6,
       "width": 832,
       "height": 480,
-      "sha256": "7f7f0bc7d6b73e4c214f39607f8a178db4d707fb474073a59c5b5e92b3f85ca0"
+      "sheets": [
+        "h2o-frames-0.webp",
+        "h2o-frames-1.webp",
+        "h2o-frames-2.webp",
+        "h2o-frames-3.webp",
+        "h2o-frames-4.webp",
+        "h2o-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "h2o-frames-0.webp": "cb9a9c4023fe4ee273a5fc21e17c0889c34f3784ab720bc2325cec25047af273",
+        "h2o-frames-1.webp": "25d3576f7450381da16c83eb4783e44b7833e5374e5b93c547fcba9d30ed3805",
+        "h2o-frames-2.webp": "633d1276a2c581a43c65f9664095a197ee23a5d63b90003f653462260702a303",
+        "h2o-frames-3.webp": "f18a4ea9c9f9256429df87a892a98bae9b8666b98664fd7d8aefa52b22618b0a",
+        "h2o-frames-4.webp": "719aad8ce6747694057f5a45cd5f4ec4838c53b29bf6acde2a029edfa838a005",
+        "h2o-frames-5.webp": "40993b005f5f87eb6820c804d0519de14655391b89cdc4a70848175b21724a57"
+      }
     },
     {
       "key": "hot3d",
@@ -84,7 +186,24 @@
       "duration": 6,
       "width": 480,
       "height": 480,
-      "sha256": "a1a7af347c7a6abc6c5570367cf6034702f635d2b03017dcb9ceb9c22b2d15ee"
+      "sheets": [
+        "hot3d-frames-0.webp",
+        "hot3d-frames-1.webp",
+        "hot3d-frames-2.webp",
+        "hot3d-frames-3.webp",
+        "hot3d-frames-4.webp",
+        "hot3d-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "hot3d-frames-0.webp": "7ce60f991926f9078d3af44371e844d6d64edb1d86890d92d29b7d9fb55f8b97",
+        "hot3d-frames-1.webp": "2279e1fee03fc432b9cbecad8728df1600974d327205e07f3fbd27e771e6140f",
+        "hot3d-frames-2.webp": "18b376539c0a46757655765a57eda4bd81b8b6f746a5d811398702c6df730927",
+        "hot3d-frames-3.webp": "cd8db57e72dd38e9a019f21cd94f2c08220f5b5fee1fc657060cf204ea3af61e",
+        "hot3d-frames-4.webp": "c2e04fd670fab613eb8985296b79ac4fcaecdcfabfa0abdd957e85bcc696a0f2",
+        "hot3d-frames-5.webp": "59275a1fc08a8326f22c7939c8bc5eb0f39c00c7f0ef640932e7526f649c2001"
+      }
     },
     {
       "key": "oakink2",
@@ -96,7 +215,24 @@
       "duration": 6,
       "width": 832,
       "height": 480,
-      "sha256": "b39b9dac69a6c5afd93519f233c8d683e004e92a4b332a37b5a700fe48511c93"
+      "sheets": [
+        "oakink2-frames-0.webp",
+        "oakink2-frames-1.webp",
+        "oakink2-frames-2.webp",
+        "oakink2-frames-3.webp",
+        "oakink2-frames-4.webp",
+        "oakink2-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "oakink2-frames-0.webp": "1df28afded4262884edad8cf051cfd0e30cd019073be3906470d02c4d5af2e1f",
+        "oakink2-frames-1.webp": "0469b80d66ede03c806da0881c1b2b5134e139b79e4b2a4f930c6b1ccbcb9eb4",
+        "oakink2-frames-2.webp": "d1612548262bce5f0008b30cd0bff9dfbdece0d50d4ece18234b2d72cff3f4ac",
+        "oakink2-frames-3.webp": "ea4a8d0d52ffa4c78b4aaa4356150fdd78866ccd03d56c9ec6d64bb5a8ef0ba0",
+        "oakink2-frames-4.webp": "47a61637fd250e5cb768a5ad12efb3a2876b686d1f16066b0d6e418d94ab8d80",
+        "oakink2-frames-5.webp": "c9be28d5bcc0b16252a71fb769602ab7cbfb3f0c30904ff3638599fc3d16f9bc"
+      }
     },
     {
       "key": "egodemo_egopro_standard",
@@ -108,7 +244,24 @@
       "duration": 6,
       "width": 608,
       "height": 480,
-      "sha256": "248b3b27020c6258aef8294daa60f0b63f906f53fb15e06ef3e161700bb50cca"
+      "sheets": [
+        "egodemo_egopro_standard-frames-0.webp",
+        "egodemo_egopro_standard-frames-1.webp",
+        "egodemo_egopro_standard-frames-2.webp",
+        "egodemo_egopro_standard-frames-3.webp",
+        "egodemo_egopro_standard-frames-4.webp",
+        "egodemo_egopro_standard-frames-5.webp"
+      ],
+      "frames": 180,
+      "columns": 5,
+      "sheet_sha256": {
+        "egodemo_egopro_standard-frames-0.webp": "d44d9f33e86328f2d207669d718d96d704fe0df1d9c2c8df7c1a9382c82e2376",
+        "egodemo_egopro_standard-frames-1.webp": "a346419c5a9c38be042534299ecb4563258234053021a3d77960866179a8fec3",
+        "egodemo_egopro_standard-frames-2.webp": "fe0bd22c599f3ede96c993a628fac17767010fec4a3e5be2c322ff2a18ef80da",
+        "egodemo_egopro_standard-frames-3.webp": "83cbe564dae0836d40ad06cccd1514604f2b1f826b27e11bab35e129156e12f5",
+        "egodemo_egopro_standard-frames-4.webp": "bb302c89f6d9047d01b5780d0245a8cacb40731ee7ea6a8a397aa9c968e07aa0",
+        "egodemo_egopro_standard-frames-5.webp": "67c59946ed8ae79c16a53cc5debf4342157df228f38fa501ce180f84896fd3a1"
+      }
     },
     {
       "key": "egodemo_egostandard",
@@ -120,20 +273,34 @@
       "duration": 5.199948,
       "width": 608,
       "height": 480,
-      "sha256": "88a90f64d0c9da8a4458cef913b3cb052ff3cf61ae39ba7954d71c3bc2af4b21"
+      "sheets": [
+        "egodemo_egostandard-frames-0.webp",
+        "egodemo_egostandard-frames-1.webp",
+        "egodemo_egostandard-frames-2.webp",
+        "egodemo_egostandard-frames-3.webp",
+        "egodemo_egostandard-frames-4.webp",
+        "egodemo_egostandard-frames-5.webp",
+        "egodemo_egostandard-frames-6.webp",
+        "egodemo_egostandard-frames-7.webp",
+        "egodemo_egostandard-frames-8.webp",
+        "egodemo_egostandard-frames-9.webp",
+        "egodemo_egostandard-frames-10.webp"
+      ],
+      "frames": 312,
+      "columns": 5,
+      "sheet_sha256": {
+        "egodemo_egostandard-frames-0.webp": "27b8b89363f3b6b592ccffda447d15e03928295046a2c6c3e5c90f74ef3e7cf0",
+        "egodemo_egostandard-frames-1.webp": "45760c04d7c87bf07fbf2a7234a1c2fdc4d90837e67f1c7fc829ba12c04b9dee",
+        "egodemo_egostandard-frames-2.webp": "8d976f60a1c4455f510d2f9bccff7be2b5d1ebbda97e4dde0794ad5cd059b1d2",
+        "egodemo_egostandard-frames-3.webp": "7c9c120d6e09692eaf58e3c9b2008ea017ffa272b460126837e69dd75ae0f0c9",
+        "egodemo_egostandard-frames-4.webp": "1eb4c558092877459d6908ee1c17b70f87fdf3803fb5c8c66f048da7dfde7254",
+        "egodemo_egostandard-frames-5.webp": "9299d19e5ff3c2e4d92d64dbeb2cb97eaa9a393653eb5bad9dd273d1c32c240b",
+        "egodemo_egostandard-frames-6.webp": "3a96103cb6f01a55beee212cb0a7088578a91f23df199068726825fe3d71010a",
+        "egodemo_egostandard-frames-7.webp": "cf46df85bf026d17d61ba993a9b44a1abca2b873aa81b43b5bddd7bd5ae5374b",
+        "egodemo_egostandard-frames-8.webp": "f2c2fb4f7a9345e1de9ae1ae1df7c076bd012e6ac397703804f4727dd61859d5",
+        "egodemo_egostandard-frames-9.webp": "72009f9d9e754baf62efd166d553ff37e6d88c54555febe568aaa2ba0af88c47",
+        "egodemo_egostandard-frames-10.webp": "cec2419dc47a0be69ed63086975038fada31654411a22cb348f98afc84c8e70c"
+      }
     }
-  ],
-  "browser_checks": {
-    "playback": 10,
-    "wipe_endpoints_and_middle": 10,
-    "native_aspect_ratio": 10,
-    "responsive_widths": [
-      375,
-      390,
-      768,
-      1024,
-      1440
-    ],
-    "javascript_errors": 0
-  }
+  ]
 }

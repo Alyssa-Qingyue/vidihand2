@@ -10,3 +10,7 @@ Order: full paper title and resource links → interactive reconstruction demo �
 Keep publication metadata limited to verified details. Main demo uses one packed decoded frame for both comparison views. Default Xperience clip is the paper's multi-person case. Video frame zero and poster show the full title, held for four seconds before baselines. Geometry assets preserve source 20/30 FPS.
 
 V38 overrides the earlier page order: interactive demo → abstract → architecture → quantitative results. Only one demo format is shown. Every named dataset has an interactive clip; each viewer follows its source aspect ratio without letterboxing.
+
+### V39: sortable results and inline frame demo
+
+Every numeric metric header is a keyboard-operable sort button with `aria-sort`. First click ranks best first (FAcc/F1 descending, errors ascending); repeated clicks reverse. Sorting persists across evaluation settings. The geometry-depth disclosure is removed. All ten dataset comparisons now use synchronized WebP frame sheets, with a raw/result divider and frame scrubber embedded in the page. No video element, playback controls, video codec dependency or MP4 request remains. Frames preserve source sampling and aspect ratio without letterboxing.

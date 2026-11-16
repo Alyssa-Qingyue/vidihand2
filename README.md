@@ -31,3 +31,7 @@ Reorganized following EgoForce's research-page sequence, using UI UX Pro Max des
 ### V38 interactive-only presentation
 
 The page now has one demo format: synchronized raw/result wipe comparisons. All ten named datasets have playable clips: Xperience, EgoDex, Ego4D, Gen-HumanEgo, ARCTIC, H2O, HOT3D, OakInk2, Ego-Pro, Ego-Std. The narrated video and static frame gallery are removed from the page; narrated video remains in the local demo workspace. Task exports use native aspect ratios with no added padding. `v2/tasks/sources.json` records source clips, start frames, native FPS, and export dimensions. Browser verification covers all ten clips, slider extremes/midpoint, and five viewport widths.
+
+### V39
+
+Results support sorting by all seven metric headers, including reverse order and both evaluation settings. Removed the geometry-depth disclosure. The embedded ten-dataset demo uses WebP frame sheets instead of a video player: drag the raw/result divider and scrub frames below it. No video element or MP4 request is used. Frame sheets retain every source frame and the original display aspect ratio.

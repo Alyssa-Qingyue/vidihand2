@@ -5,7 +5,7 @@
 <title>ViDiHand V2</title>
 <meta name="description" content="ViDiHand V2: Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild.">
 <meta property="og:title" content="ViDiHand V2"><meta property="og:description" content="Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild"><meta property="og:image" content="v2/teaser.png">
-<link rel="stylesheet" href="v2/style.css?v=38">
+<link rel="stylesheet" href="v2/style.css?v=39">
 </head>
 <body>
 <a class="skip-link" href="#demo">Skip to interactive demo</a><header><nav aria-label="Main navigation"><a href="#demo">Demo</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#benchmark">Results</a></nav></header>
@@ -19,16 +19,15 @@
 <section id="demo" class="section">
 <h2>3D hand motion from everyday video</h2>
 <p class="section-intro">One model across cameras, activities, and interactions. Drag to explore the reconstruction.</p>
-<div id="task-tabs" class="tabs" role="group" aria-label="Select a video task"></div>
+<div id="task-tabs" class="tabs" role="group" aria-label="Select a dataset"></div>
 <div class="task-viewer">
 <canvas id="task-canvas" width="640" height="480" role="img" aria-label="Raw video and ViDiHand V2 reconstruction comparison"></canvas>
 <div class="wipe-label raw-label">Raw video</div><div class="wipe-label reconstruction-label">ViDiHand V2</div>
 <div id="wipe-line" aria-hidden="true"><span>↔</span></div>
 <input id="wipe" type="range" min="0" max="100" value="50" aria-label="Reveal raw video on the left and reconstruction on the right">
 </div>
-<div class="task-controls"><button id="task-play" type="button">Play motion</button><p id="task-caption" aria-live="polite"></p></div>
-<video id="task-video" muted loop playsinline preload="metadata" hidden></video>
-<p class="small">Move the divider or use the arrow keys. Both views come from the same video frame.</p>
+<div class="task-controls"><p id="task-caption" aria-live="polite"></p><label for="task-frame">Frame</label><input id="task-frame" type="range" min="0" max="179" value="90"><output id="frame-position" for="task-frame"></output></div>
+<p class="small">Drag the divider to compare, or scrub through frames below. Both controls support the arrow keys.</p>
 </section>
 <section id="abstract" class="section abstract"><h2>Abstract</h2>
 <p>Reconstructing metric 3D hand motion from egocentric video is essential for learning manipulation from human demonstrations. Yet methods that regress absolute depth from appearance struggle to generalize to cameras unseen during training.</p>
@@ -38,11 +37,11 @@
 <h2>Architecture</h2>
 <p class="method-text">ViDiHand V2 uses a video diffusion prior to predict MANO pose, metric shape, and 2D joints. <strong>Clip-Level Ray Fitting</strong> computes hand depth from these predictions and the camera intrinsics over a whole clip. <strong>Confidence-Gated Fusion</strong> then refines joints where their 2D locations are reliable.</p>
 <figure><img src="v2/method.png" alt="ViDiHand V2 pipeline: video diffusion features predict the hand and 2D joints, followed by Clip-Level Ray Fitting and Confidence-Gated Fusion" loading="lazy"></figure>
-<details class="geometry"><summary>Why use geometry for depth?</summary><p>A hand can align with the image yet sit at the wrong depth. Fitting a metric hand to camera rays makes its placement follow the test camera’s intrinsics.</p><img src="v2/focal.png" alt="Reconstruction under different supplied focal lengths" loading="lazy"></details>
+
 </section>
-<section id="benchmark" class="section"><h2>Quantitative Results</h2><p>All 18 baselines are trained on the same egocentric datasets. In-domain results average ARCTIC, H2O, HOT3D, OakInk2, Ego-Pro and Ego-Std. The table below reproduces the paper’s main comparison.</p><div class="tabs" role="group" aria-label="Evaluation setting"><button class="active" data-setting="wild" aria-pressed="true">In the wild</button><button data-setting="domain" aria-pressed="false">In-domain</button></div><div class="table-scroll"><table><caption id="table-caption">Gen-HumanEgo · In-the-wild evaluation</caption><thead><tr><th scope="col">Method</th><th scope="col">FAcc ↑</th><th scope="col">F1 ↑</th><th scope="col">MPJPE-abs-p ↓</th><th scope="col">EPE2D-p ↓</th><th scope="col">MPJPE-p ↓</th><th scope="col">PA-p ↓</th><th scope="col">Jitter ↓</th></tr></thead><tbody id="metrics"></tbody></table></div><p class="small">FAcc and F1 in %. Pose errors in mm, EPE2D-p in pixels, jitter in mm/frame². “-p” evaluates all ground-truth hands, including a penalty for detection failures. Lower is better except detection metrics.</p><noscript><p>Enable JavaScript to switch scenes and view the interactive comparison table.</p></noscript></section>
+<section id="benchmark" class="section"><h2>Quantitative Results</h2><p>All 18 baselines are trained on the same egocentric datasets. In-domain results average ARCTIC, H2O, HOT3D, OakInk2, Ego-Pro and Ego-Std. The table below reproduces the paper’s main comparison.</p><div class="tabs" role="group" aria-label="Evaluation setting"><button class="active" data-setting="wild" aria-pressed="true">In the wild</button><button data-setting="domain" aria-pressed="false">In-domain</button></div><div class="table-scroll"><table><caption id="table-caption">Gen-HumanEgo · In-the-wild evaluation</caption><thead><tr><th scope="col">Method</th><th scope="col" aria-sort="none"><button type="button" data-metric="0" aria-label="Sort by FAcc">FAcc ↑<span class="sort-indicator" aria-hidden="true"> ↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-metric="1" aria-label="Sort by F1">F1 ↑<span class="sort-indicator" aria-hidden="true"> ↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-metric="2" aria-label="Sort by MPJPE-abs-p">MPJPE-abs-p ↓<span class="sort-indicator" aria-hidden="true"> ↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-metric="3" aria-label="Sort by EPE2D-p">EPE2D-p ↓<span class="sort-indicator" aria-hidden="true"> ↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-metric="4" aria-label="Sort by MPJPE-p">MPJPE-p ↓<span class="sort-indicator" aria-hidden="true"> ↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-metric="5" aria-label="Sort by PA-p">PA-p ↓<span class="sort-indicator" aria-hidden="true"> ↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-metric="6" aria-label="Sort by Jitter">Jitter ↓<span class="sort-indicator" aria-hidden="true"> ↕</span></button></th></tr></thead><tbody id="metrics"></tbody></table></div><p class="small">Click a metric to sort; click again to reverse. FAcc and F1 in %. Pose errors in mm, EPE2D-p in pixels, jitter in mm/frame². “-p” evaluates all ground-truth hands, including a penalty for detection failures. Lower is better except detection metrics.</p><noscript><p>Enable JavaScript to switch scenes and view the interactive comparison table.</p></noscript></section>
 
 </main>
 <footer>ViDiHand V2 · <a href="https://vidihand.github.io/">ViDiHand V1</a></footer>
-<script src="v2/app.js?v=38" defer></script>
+<script src="v2/app.js?v=39" defer></script>
 </body></html>
