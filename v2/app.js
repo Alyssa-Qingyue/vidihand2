@@ -119,17 +119,3 @@ async function initQualitative() {
  select(0);
 }
 initQualitative().catch(() => {document.querySelector('#comparison-status').textContent = 'Comparison scenes could not be loaded.';});
-
-const copyCitation = document.querySelector('#copy-citation');
-copyCitation.addEventListener('click',async () => {
- const text = document.querySelector('#citation-text');
- const status = document.querySelector('#citation-status');
- try {
-  await navigator.clipboard.writeText(text.textContent);
-  status.textContent = 'BibTeX copied to clipboard.';
- } catch (_) {
-  const range = document.createRange();range.selectNodeContents(text);
-  const selection = window.getSelection();selection.removeAllRanges();selection.addRange(range);
-  status.textContent = 'BibTeX selected. Press Ctrl+C or ⌘C to copy.';
- }
-});
