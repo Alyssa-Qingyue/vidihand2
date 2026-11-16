@@ -1,14 +1,16 @@
 {
-  "version": 45,
+  "version": 46,
   "presentation": "Full narrated demo followed by synchronized qualitative comparisons from paper Figures 5 and 6",
   "narrated_demo": {
-    "file": "v2/demo-v44.mp4",
+    "file": "v2/demo-v46.mp4",
     "duration": 92,
     "fps": 30,
     "width": 1920,
     "height": 1080,
     "opening_insets": "All six overlay insets preserve native aspect ratio and original width, with no cropping or letterboxing",
-    "sha256": "f912667aeac68fbd12277f86790176db23df0c0db9a9371a4665b371f7242a6b"
+    "sha256": "72ea8fa1e063afd5b445a64034e46f451471ebd6e3aa2b1edfbbe4dbc4d2c2ee",
+    "proof_camera": "One fixed camera, center and scale shared by all six methods throughout playback; full-rate geometry and non-resampled wrist trails; continuous final orbit",
+    "wild_comparisons": "Raw input + all 18 baselines + ours for Xperience, EgoDex, Ego4D and GenHumanEgo; additional ground truth for GenHumanEgo; native-rate 3D insets"
   },
   "qualitative_comparisons": {
     "scenes": "v2/qualitative/scenes.json",
