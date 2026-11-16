@@ -39,3 +39,7 @@ Results support sorting by all seven metric headers, including reverse order and
 ### V40: restore the complete demo
 
 The complete 92-second narrated demo is embedded immediately after the title, before the interactive dataset comparisons. It opens on the restored title, includes baseline/GT comparisons, and retains 1080p at 30 FPS. Dataset previews remain interactive image-frame comparisons. The no-video rule applies to dataset previews, not the complete narrated demo.
+
+### V41
+
+Restored the original six-method paper-frame baseline gallery immediately after the complete demo, before the ten dataset interactions. The opening demo overlay insets now fill their bounds using cover with clipped overflow. Original title, synchronized 30 FPS geometry, GT, timing and audio are retained.

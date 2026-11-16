@@ -84,3 +84,23 @@ async function initTasks() {
  select(0);
 }
 initTasks().catch(() => {document.querySelector('#task-caption').textContent = 'Previews unavailable.';});
+
+async function initComparisons() {
+ const response = await fetch('v2/cases.json');
+ if (!response.ok) throw Error('Comparisons unavailable');
+ const cases = await response.json(), tabs = document.querySelector('#case-tabs');
+ const methods = {input:'Input',wilor:'WiLoR',mint:'MINT',v1:'ViDiHand V1',ace:'ACE-Ego-Hand',ours:'ViDiHand V2'};
+ function select(index) {
+  const scene = cases[index];
+  [...tabs.children].forEach((button,i) => {button.classList.toggle('active',i===index);button.setAttribute('aria-pressed',String(i===index));});
+  document.querySelector('#case-caption').textContent = scene.dataset+' · '+scene.label+' · Frame '+scene.frame;
+  document.querySelector('#gallery').replaceChildren(...Object.entries(methods).map(([key,label]) => {
+   const figure = document.createElement('figure'), image = document.createElement('img'), caption = document.createElement('figcaption');
+   image.src = 'v2/case-'+scene.frame+'/'+key+'.jpg'; image.alt = label+': '+scene.label; image.width=640;image.height=480;image.loading='lazy';
+   caption.textContent=label;figure.append(image,caption);return figure;
+  }));
+ }
+ cases.forEach((scene,i) => {const button=document.createElement('button');button.type='button';button.textContent=scene.label;button.addEventListener('click',()=>select(i));tabs.append(button);});
+ select(0);
+}
+initComparisons().catch(() => {document.querySelector('#case-caption').textContent='Comparisons unavailable.';});
