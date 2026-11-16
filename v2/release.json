@@ -1,6 +1,6 @@
 {
-  "version": 41,
-  "presentation": "Full narrated demo, restored baseline gallery, then ten interactive dataset comparisons",
+  "version": 44,
+  "presentation": "Full narrated demo followed by ten interactive dataset comparisons",
   "datasets": [
     {
       "key": "wild1",
@@ -304,12 +304,12 @@
     }
   ],
   "narrated_demo": {
-    "file": "v2/demo-v41.mp4",
+    "file": "v2/demo-v44.mp4",
     "duration": 92,
     "fps": 30,
     "width": 1920,
     "height": 1080,
-    "opening_insets": "All six overlay insets use cover and clipped overflow to fill their bounds",
-    "sha256": "8eb7ff16736b6d1c2f7f25f16a1cf614916a8d3a871cdf66cbf1bcff9fe8fcb4"
+    "opening_insets": "All six overlay insets preserve native aspect ratio and original width, with no cropping or letterboxing",
+    "sha256": "f912667aeac68fbd12277f86790176db23df0c0db9a9371a4665b371f7242a6b"
   }
 }
