@@ -92,7 +92,7 @@ async function initQualitative() {
    canvas.setAttribute('role','img');canvas.setAttribute('aria-label',scene.label+' — '+names[method]+(method==='input'?'':': 2D reconstruction above 3D hands and wrist trajectories'));
    const ctx = canvas.getContext('2d');contexts.push({ctx,height:canvas.height});
    const poster = new Image();poster.onload = () => {if (token===generation && (!video || video.readyState<2)) ctx.drawImage(poster,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height);};
-   poster.src = 'v2/qualitative/'+scene.key+'-'+method+(scene.posterSuffix||'')+'.jpg';
+   poster.src = 'v2/qualitative/'+scene.key+'-'+method+scene.posterSuffix+'.jpg';
    card.append(label,canvas);grid.append(card);
   });
   video = document.createElement('video');video.muted = true;video.loop = true;video.playsInline = true;video.preload = 'auto';
