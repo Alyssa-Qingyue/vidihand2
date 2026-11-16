@@ -47,7 +47,7 @@ async function initQualitative() {
  const caption = document.querySelector('#scene-caption'), status = document.querySelector('#comparison-status');
  const play = document.querySelector('#comparison-play'), timeline = document.querySelector('#comparison-frame');
  const position = document.querySelector('#comparison-position');
- const names = {input:'Input',ours:'ViDiHand V2 (Ours)',gt:'Ground Truth',wilor:'WiLoR',mint:'MINT',v1:'ViDiHand V1',ace:'ACE-Ego-Hand'};
+ const names = {ours:'ViDiHand V2 (Ours)',gt:'Ground Truth',wilor:'WiLoR',mint:'MINT',v1:'ViDiHand V1',ace:'ACE-Ego-Hand'};
  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
  let video = null, scene = null, contexts = [], generation = 0, wantsPlay = !reducedMotion.matches;
  function updateControl() {
@@ -56,7 +56,7 @@ async function initQualitative() {
  }
  function draw() {
   if (!video || video.readyState < 2) return;
-  contexts.forEach(({ctx,height},i) => ctx.drawImage(video,(i%scene.columns)*scene.width,Math.floor(i/scene.columns)*scene.height,scene.width,height,0,0,scene.width,height));
+  contexts.forEach(({ctx,height,index:i}) => ctx.drawImage(video,(i%scene.columns)*scene.width,Math.floor(i/scene.columns)*scene.height,scene.width,height,0,0,scene.width,height));
   const frame = Math.min(scene.frames-1,Math.round(video.currentTime*scene.fps));
   timeline.value = frame; position.textContent = (frame+1)+' / '+scene.frames;
   grid.dataset.frame = frame;
@@ -79,18 +79,18 @@ async function initQualitative() {
   const token = ++generation;
   if (video) {video.pause(); video.removeAttribute('src'); video.load();}
   scene = scenes[index]; contexts = []; grid.replaceChildren(); grid.dataset.scene = scene.key;
-  grid.classList.toggle('without-gt',!scene.methods.includes('gt'));
   [...tabs.children].forEach((b,i) => {b.classList.toggle('active',i===index);b.setAttribute('aria-pressed',String(i===index));});
   caption.textContent = scene.dataset+' · '+scene.label+' · Fig. '+scene.figure;
   status.textContent = 'Loading comparison…'; play.disabled = true; updateControl();
   timeline.max = scene.frames-1; timeline.value = 0; position.textContent = '1 / '+scene.frames;
-  scene.methods.forEach(method => {
+  scene.methods.forEach((method,index) => {
+   if (method==='input') return;
    const card = document.createElement('figure');
-   card.className = 'comparison-card '+(method==='ours'?'ours ':'')+(['input','ours','gt'].includes(method)?'primary':'baseline');
+   card.className = 'comparison-card'+(method==='ours'?' ours':'');
    const label = document.createElement('figcaption');label.textContent = names[method];
-   const canvas = document.createElement('canvas');canvas.width = scene.width;canvas.height = method==='input' ? scene.imageHeight : scene.height;
-   canvas.setAttribute('role','img');canvas.setAttribute('aria-label',scene.label+' — '+names[method]+(method==='input'?'':': 2D reconstruction above 3D hands and wrist trajectories'));
-   const ctx = canvas.getContext('2d');contexts.push({ctx,height:canvas.height});
+   const canvas = document.createElement('canvas');canvas.width = scene.width;canvas.height = scene.height;
+   canvas.setAttribute('role','img');canvas.setAttribute('aria-label',scene.label+' — '+names[method]+': 2D reconstruction above 3D hands and wrist trajectories');
+   const ctx = canvas.getContext('2d');contexts.push({ctx,height:canvas.height,index});
    const poster = new Image();poster.onload = () => {if (token===generation && (!video || video.readyState<2)) ctx.drawImage(poster,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height);};
    poster.src = 'v2/qualitative/'+scene.key+'-'+method+scene.posterSuffix+'.jpg';
    card.append(label,canvas);grid.append(card);

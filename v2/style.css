@@ -91,10 +91,8 @@ thead button:hover, thead button.sorted { color:var(--accent);background:#f0edf7
 .comparison-heading p { margin:0;color:var(--muted);font-size:14px }
 .comparison-heading button { min-width:76px;min-height:44px;border:1px solid var(--line);border-radius:22px;background:white;color:var(--ink);font-size:13px }
 .comparison-heading button:hover { border-color:var(--accent) }
-.comparison-grid { display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:start;gap:28px 16px }
-.comparison-card { margin:0;min-width:0;grid-column:span 3 }
-.comparison-card.primary { grid-column:span 4 }
-.without-gt .comparison-card.primary { grid-column:span 6 }
+.comparison-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:28px 16px }
+.comparison-card { margin:0;min-width:0 }
 .comparison-card figcaption { font-size:13px;font-weight:600;text-align:center;line-height:1.5;margin-bottom:8px }
 .comparison-card.ours figcaption { color:#24843c }
 .comparison-card.ours canvas { outline:2px solid #24843c33;outline-offset:3px }
@@ -111,9 +109,6 @@ thead button:hover, thead button.sorted { color:var(--accent);background:#f0edf7
   .scene-tabs { grid-template-columns:repeat(2,minmax(0,1fr));gap:8px }
   .scene-tabs button { min-height:68px }
   .comparison-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px }
-  .comparison-card, .comparison-card.primary, .without-gt .comparison-card.primary { grid-column:span 1 }
-  .comparison-card.primary:has(+.baseline) { grid-column:1/-1;max-width:calc(50% - 5px);width:100%;justify-self:center }
-  .without-gt .comparison-card.primary:has(+.baseline) { grid-column:span 1;max-width:none }
   .comparison-card figcaption { font-size:12px }
   .comparison-heading p { font-size:12px }
 }
