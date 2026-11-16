@@ -5,7 +5,7 @@
 <title>ViDiHand V2</title>
 <meta name="description" content="ViDiHand V2: Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild.">
 <meta property="og:title" content="ViDiHand V2"><meta property="og:description" content="Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild"><meta property="og:image" content="v2/teaser.png">
-<link rel="stylesheet" href="v2/style.css?v=42">
+<link rel="stylesheet" href="v2/style.css?v=45">
 </head>
 <body>
 <a class="skip-link" href="#demo">Skip to demo</a><header><nav aria-label="Main navigation"><a href="#demo">Demo</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#benchmark">Results</a></nav></header>
@@ -25,18 +25,14 @@
 <p class="video-caption">Metric 3D hand motion from everyday egocentric video.<span class="small">Music: <a href="https://www.scottbuckley.com.au/library/horizons/">Horizons — Scott Buckley</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</span></p>
 </section>
 
-<section id="interactive-demo" class="section">
-<h2>3D hand motion from everyday video</h2>
-<p class="section-intro">One model across cameras, activities, and interactions. Drag to explore the reconstruction.</p>
-<div id="task-tabs" class="tabs" role="group" aria-label="Select a dataset"></div>
-<div class="task-viewer">
-<canvas id="task-canvas" width="640" height="480" role="img" aria-label="Raw video and ViDiHand V2 reconstruction comparison"></canvas>
-<div class="wipe-label raw-label">Raw video</div><div class="wipe-label reconstruction-label">ViDiHand V2</div>
-<div id="wipe-line" aria-hidden="true"><span>↔</span></div>
-<input id="wipe" type="range" min="0" max="100" value="50" aria-label="Reveal raw video on the left and reconstruction on the right">
-</div>
-<div class="task-controls"><p id="task-caption" aria-live="polite"></p><label for="task-frame">Frame</label><input id="task-frame" type="range" min="0" max="179" value="90"><output id="frame-position" for="task-frame"></output></div>
-
+<section id="interactive-demo" class="section" aria-labelledby="qualitative-heading">
+<h2 id="qualitative-heading">Qualitative Results</h2>
+<p class="section-intro">Side-by-side comparisons on the six cases in Figures 5 and 6.</p>
+<div id="scene-tabs" class="scene-tabs" role="group" aria-label="Select a comparison scene"></div>
+<div class="comparison-heading"><p id="scene-caption" aria-live="polite"></p><button id="comparison-play" type="button" aria-label="Pause comparison" disabled>Pause</button></div>
+<div id="comparison-grid" class="comparison-grid" aria-label="Synchronized method comparisons"></div>
+<div class="comparison-timeline"><label for="comparison-frame">Frame</label><input id="comparison-frame" type="range" min="0" max="179" value="0" aria-label="Seek all methods to the same frame"><output id="comparison-position" for="comparison-frame"></output></div>
+<p id="comparison-status" class="comparison-status" role="status"></p>
 </section>
 <section id="abstract" class="section abstract"><h2>Abstract</h2>
 <p>Reconstructing metric 3D hand motion from egocentric video is essential for learning manipulation from human demonstrations. Yet methods that regress absolute depth from appearance struggle to generalize to cameras unseen during training.</p>
@@ -52,5 +48,5 @@
 
 </main>
 <footer>ViDiHand V2 · <a href="https://vidihand.github.io/">ViDiHand V1</a></footer>
-<script src="v2/app.js?v=43" defer></script>
+<script src="v2/app.js?v=45" defer></script>
 </body></html>

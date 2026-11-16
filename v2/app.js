@@ -39,48 +39,84 @@ async function initResults() {
 }
 initResults().catch(() => {document.querySelector('#table-caption').textContent = 'Results unavailable.';});
 
-async function initTasks() {
- const response = await fetch('v2/tasks/frames.json?v=39');
- if (!response.ok) throw Error('Previews unavailable');
- const tasks = await response.json();
- const canvas = document.querySelector('#task-canvas'), ctx = canvas.getContext('2d');
- const wipe = document.querySelector('#wipe'), line = document.querySelector('#wipe-line');
- const timeline = document.querySelector('#task-frame'), tabs = document.querySelector('#task-tabs');
- const caption = document.querySelector('#task-caption'), position = document.querySelector('#frame-position');
- const images = new Map();
- let selected = 0, revision = 0;
- function load(src) {
-  if (!images.has(src)) images.set(src,new Promise((resolve,reject) => {
-   const image = new Image(); image.onload = () => resolve(image); image.onerror = reject; image.src = 'v2/tasks/'+src;
-  }));
-  return images.get(src);
+async function initQualitative() {
+ const response = await fetch('v2/qualitative/scenes.json?v=45');
+ if (!response.ok) throw Error('Comparison scenes unavailable');
+ const scenes = await response.json();
+ const tabs = document.querySelector('#scene-tabs'), grid = document.querySelector('#comparison-grid');
+ const caption = document.querySelector('#scene-caption'), status = document.querySelector('#comparison-status');
+ const play = document.querySelector('#comparison-play'), timeline = document.querySelector('#comparison-frame');
+ const position = document.querySelector('#comparison-position');
+ const names = {input:'Input',ours:'ViDiHand V2 (Ours)',gt:'Ground Truth',wilor:'WiLoR',mint:'MINT',v1:'ViDiHand V1',ace:'ACE-Ego-Hand'};
+ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+ let video = null, scene = null, contexts = [], generation = 0, wantsPlay = !reducedMotion.matches;
+ function updateControl() {
+  play.textContent = wantsPlay ? 'Pause' : 'Play';
+  play.setAttribute('aria-label', (wantsPlay ? 'Pause' : 'Play')+' comparison');
  }
- async function draw() {
-  const token = ++revision, task = tasks[selected], frame = Number(timeline.value);
-  line.style.left = wipe.value+'%';
-  position.textContent = (frame+1)+' / '+task.frames;
-  const image = await load(task.sheets[Math.floor(frame/task.fps)]);
-  if (token !== revision) return;
-  const local = frame % task.fps, w = task.width, h = task.height;
-  const sx = local % task.columns * w*2, sy = Math.floor(local/task.columns)*h;
-  const cut = Number(wipe.value)/100*w;
-  ctx.drawImage(image,sx+w,sy,w,h,0,0,w,h);
-  if (cut > 0) ctx.drawImage(image,sx,sy,cut,h,0,0,cut,h);
-  canvas.dataset.frame = String(frame); canvas.dataset.scene = task.key;
+ function draw() {
+  if (!video || video.readyState < 2) return;
+  contexts.forEach((ctx,i) => ctx.drawImage(video,(i%scene.columns)*scene.width,Math.floor(i/scene.columns)*scene.height,scene.width,scene.height,0,0,scene.width,scene.height));
+  const frame = Math.min(scene.frames-1,Math.round(video.currentTime*scene.fps));
+  timeline.value = frame; position.textContent = (frame+1)+' / '+scene.frames;
+  grid.dataset.frame = frame;
  }
- function redraw() {draw().catch(() => {caption.textContent = 'Preview unavailable.';});}
- function select(i) {
-  selected = i; const task = tasks[i];
-  canvas.width = task.width; canvas.height = task.height;
-  canvas.parentElement.style.aspectRatio = task.width+'/'+task.height;
-  timeline.max = task.frames-1; timeline.value = Math.min(Math.round(task.fps*3),task.frames-1);
-  [...tabs.children].forEach((b,j) => {b.classList.toggle('active',j===i); b.setAttribute('aria-pressed',String(j===i));});
-  caption.textContent = task.label+(task.key === 'wild1' ? ' · Multi-person interaction' : '');
-  canvas.setAttribute('aria-label',task.label+': synchronized raw and reconstruction comparison');
-  redraw();
+ function tick(token) {
+  if (token !== generation) return;
+  draw();
+  if ('requestVideoFrameCallback' in video) video.requestVideoFrameCallback(() => tick(token));
+  else requestAnimationFrame(() => tick(token));
  }
- tasks.forEach((task,i) => {const b = document.createElement('button'); b.type='button'; b.textContent=task.label; b.addEventListener('click',() => select(i)); tabs.append(b);});
- wipe.addEventListener('input',redraw); timeline.addEventListener('input',redraw);
+ async function start() {
+  const current = video;
+  if (!current || !wantsPlay) return;
+  try {await current.play();} catch (_) {
+   if (current !== video) return;
+   wantsPlay = false; updateControl();
+  }
+ }
+ function select(index) {
+  const token = ++generation;
+  if (video) {video.pause(); video.removeAttribute('src'); video.load();}
+  scene = scenes[index]; contexts = []; grid.replaceChildren(); grid.dataset.scene = scene.key;
+  grid.classList.toggle('without-gt',!scene.methods.includes('gt'));
+  [...tabs.children].forEach((b,i) => {b.classList.toggle('active',i===index);b.setAttribute('aria-pressed',String(i===index));});
+  caption.textContent = scene.dataset+' · '+scene.label+' · Fig. '+scene.figure;
+  status.textContent = 'Loading comparison…'; play.disabled = true; updateControl();
+  timeline.max = scene.frames-1; timeline.value = 0; position.textContent = '1 / '+scene.frames;
+  scene.methods.forEach(method => {
+   const card = document.createElement('figure');
+   card.className = 'comparison-card '+(method==='ours'?'ours ':'')+(['input','ours','gt'].includes(method)?'primary':'baseline');
+   const label = document.createElement('figcaption');label.textContent = names[method];
+   const canvas = document.createElement('canvas');canvas.width = scene.width;canvas.height = scene.height;
+   canvas.setAttribute('role','img');canvas.setAttribute('aria-label',scene.label+' — '+names[method]);
+   const ctx = canvas.getContext('2d');contexts.push(ctx);
+   const poster = new Image();poster.onload = () => {if (token===generation && (!video || video.readyState<2)) ctx.drawImage(poster,0,0,canvas.width,canvas.height);};
+   poster.src = 'v2/qualitative/'+scene.key+'-'+method+'.jpg';
+   card.append(label,canvas);grid.append(card);
+  });
+  video = document.createElement('video');video.muted = true;video.loop = true;video.playsInline = true;video.preload = 'auto';
+  video.addEventListener('loadeddata',() => {
+   if (token!==generation) return;
+   play.disabled = false;status.textContent = '';draw();tick(token);start();
+  },{once:true});
+  video.addEventListener('seeked',() => {if(token===generation) draw();});
+  video.addEventListener('error',() => {
+   if(token!==generation) return;
+   status.textContent = 'Showing the paper frames. Motion preview is temporarily unavailable.';
+  });
+  video.src = 'v2/qualitative/'+scene.video;
+ }
+ scenes.forEach((s,i) => {
+  const button = document.createElement('button');button.type = 'button';button.setAttribute('aria-pressed','false');
+  const number = document.createElement('span');number.className = 'scene-number';number.textContent = String(i+1).padStart(2,'0');
+  const title = document.createElement('span');title.textContent = s.label;
+  const dataset = document.createElement('small');dataset.textContent = s.dataset;
+  title.append(dataset);button.append(number,title);button.addEventListener('click',() => select(i));tabs.append(button);
+ });
+ play.addEventListener('click',() => {wantsPlay = !wantsPlay;updateControl();if(wantsPlay) start();else video.pause();});
+ timeline.addEventListener('input',() => {if(video.readyState>=1) video.currentTime = Number(timeline.value)/scene.fps;});
+ document.addEventListener('visibilitychange',() => {if(document.hidden) video.pause();else if(wantsPlay) start();});
  select(0);
 }
-initTasks().catch(() => {document.querySelector('#task-caption').textContent = 'Previews unavailable.';});
+initQualitative().catch(() => {document.querySelector('#comparison-status').textContent = 'Comparison scenes could not be loaded.';});
