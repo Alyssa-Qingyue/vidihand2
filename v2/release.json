@@ -1,6 +1,6 @@
 {
-  "version": 39,
-  "presentation": "inline image-frame comparison; no video element or MP4 dependency",
+  "version": 40,
+  "presentation": "Full narrated demo embedded above ten interactive dataset comparisons",
   "datasets": [
     {
       "key": "wild1",
@@ -302,5 +302,12 @@
         "egodemo_egostandard-frames-10.webp": "cec2419dc47a0be69ed63086975038fada31654411a22cb348f98afc84c8e70c"
       }
     }
-  ]
+  ],
+  "narrated_demo": {
+    "file": "v2/demo-v40.mp4",
+    "duration": 92,
+    "fps": 30,
+    "width": 1920,
+    "height": 1080
+  }
 }

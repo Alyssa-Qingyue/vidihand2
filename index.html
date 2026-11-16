@@ -5,10 +5,10 @@
 <title>ViDiHand V2</title>
 <meta name="description" content="ViDiHand V2: Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild.">
 <meta property="og:title" content="ViDiHand V2"><meta property="og:description" content="Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild"><meta property="og:image" content="v2/teaser.png">
-<link rel="stylesheet" href="v2/style.css?v=39">
+<link rel="stylesheet" href="v2/style.css?v=40">
 </head>
 <body>
-<a class="skip-link" href="#demo">Skip to interactive demo</a><header><nav aria-label="Main navigation"><a href="#demo">Demo</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#benchmark">Results</a></nav></header>
+<a class="skip-link" href="#demo">Skip to demo</a><header><nav aria-label="Main navigation"><a href="#demo">Demo</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#benchmark">Results</a></nav></header>
 <main>
 <section class="hero">
 <h1>ViDiHand <span>V2</span></h1>
@@ -16,7 +16,15 @@
 <div class="links"><a class="button" href="https://github.com/Alyssa-Qingyue/vidihand2">GitHub ↗</a><a class="button" href="https://vidihand.github.io/">ViDiHand V1 ↗</a></div>
 <p class="release-note">Paper and implementation coming soon.</p>
 </section>
-<section id="demo" class="section">
+<section id="demo" class="section narrated-demo" aria-labelledby="demo-heading">
+<h2 id="demo-heading">Demo</h2>
+<video id="narrated-demo" controls playsinline preload="metadata" poster="v2/demo-title-v40.jpg" aria-label="ViDiHand V2 full narrated demo">
+<source src="v2/demo-v40.mp4" type="video/mp4">
+<track kind="captions" src="v2/demo.vtt" srclang="en" label="English">
+</video>
+<p class="video-caption">Metric 3D hand motion from everyday egocentric video.<span class="small">Music: <a href="https://www.scottbuckley.com.au/library/horizons/">Horizons — Scott Buckley</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</span></p>
+</section>
+<section id="interactive-demo" class="section">
 <h2>3D hand motion from everyday video</h2>
 <p class="section-intro">One model across cameras, activities, and interactions. Drag to explore the reconstruction.</p>
 <div id="task-tabs" class="tabs" role="group" aria-label="Select a dataset"></div>
@@ -43,5 +51,5 @@
 
 </main>
 <footer>ViDiHand V2 · <a href="https://vidihand.github.io/">ViDiHand V1</a></footer>
-<script src="v2/app.js?v=39" defer></script>
+<script src="v2/app.js?v=40" defer></script>
 </body></html>

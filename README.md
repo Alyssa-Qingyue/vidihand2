@@ -35,3 +35,7 @@ The page now has one demo format: synchronized raw/result wipe comparisons. All 
 ### V39
 
 Results support sorting by all seven metric headers, including reverse order and both evaluation settings. Removed the geometry-depth disclosure. The embedded ten-dataset demo uses WebP frame sheets instead of a video player: drag the raw/result divider and scrub frames below it. No video element or MP4 request is used. Frame sheets retain every source frame and the original display aspect ratio.
+
+### V40: restore the complete demo
+
+The complete 92-second narrated demo is embedded immediately after the title, before the interactive dataset comparisons. It opens on the restored title, includes baseline/GT comparisons, and retains 1080p at 30 FPS. Dataset previews remain interactive image-frame comparisons. The no-video rule applies to dataset previews, not the complete narrated demo.

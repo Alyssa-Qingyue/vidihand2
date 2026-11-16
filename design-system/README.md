@@ -14,3 +14,7 @@ V38 overrides the earlier page order: interactive demo → abstract → architec
 ### V39: sortable results and inline frame demo
 
 Every numeric metric header is a keyboard-operable sort button with `aria-sort`. First click ranks best first (FAcc/F1 descending, errors ascending); repeated clicks reverse. Sorting persists across evaluation settings. The geometry-depth disclosure is removed. All ten dataset comparisons now use synchronized WebP frame sheets, with a raw/result divider and frame scrubber embedded in the page. No video element, playback controls, video codec dependency or MP4 request remains. Frames preserve source sampling and aspect ratio without letterboxing.
+
+### V40: restore the complete demo
+
+The complete 92-second narrated demo is embedded immediately after the title, before the interactive dataset comparisons. It opens on the restored title, includes baseline/GT comparisons, and retains 1080p at 30 FPS. Dataset previews remain interactive image-frame comparisons. The no-video rule applies to dataset previews, not the complete narrated demo.

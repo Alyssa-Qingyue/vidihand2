@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:03.352
+Introducing ViDiHand V2.
+
+00:00:05.000 --> 00:00:09.353
+Watch what happens when we move beyond the image.
+
+00:00:09.353 --> 00:00:11.288
+The depth becomes clear.
+
+00:00:15.000 --> 00:00:18.500
+Our reconstruction follows the reference through the motion,
+
+00:00:18.500 --> 00:00:20.688
+with lower three D error.
+
+00:00:24.300 --> 00:00:26.081
+This is ViDiHand V2,
+
+00:00:26.081 --> 00:00:28.308
+built for the real world.
+
+00:00:30.300 --> 00:00:34.678
+The same model works across all four in-the-wild datasets,
+
+00:00:34.678 --> 00:00:37.596
+capturing hands as everyday life unfolds.
+
+00:00:56.200 --> 00:00:57.227
+On GenHumanEgo,
+
+00:00:57.227 --> 00:01:01.336
+just thirty two point six millimeters of error.
+
+00:01:02.100 --> 00:01:04.290
+We keep hands in sight,
+
+00:01:04.290 --> 00:01:07.356
+with over ninety nine percent frame accuracy.
+
+00:01:08.100 --> 00:01:10.270
+The motion stays steady too,
+
+00:01:10.270 --> 00:01:13.308
+with the lowest jitter in this comparison.
+
+00:01:25.100 --> 00:01:26.513
+ViDiHand V2.
+
+00:01:26.513 --> 00:01:30.044
+Let's bring 3D to life.
