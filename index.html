@@ -5,7 +5,7 @@
 <title>ViDiHand V2</title>
 <meta name="description" content="ViDiHand V2: Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild.">
 <meta property="og:title" content="ViDiHand V2"><meta property="og:description" content="Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild"><meta property="og:image" content="v2/teaser.png">
-<link rel="stylesheet" href="v2/style.css">
+<link rel="stylesheet" href="v2/style.css?v=36">
 </head>
 <body>
 <header><nav aria-label="Main navigation"><a href="#demo">Demo</a><a href="#results">Results</a><a href="#method">Method</a><a href="#benchmark">Evaluation</a></nav></header>
@@ -17,16 +17,29 @@
 <p class="release-note">Paper and implementation coming soon.</p>
 </section>
 <section id="demo" class="demo section" aria-label="Video demo">
-<video controls playsinline preload="none" poster="v2/demo-poster.jpg" aria-label="ViDiHand V2 narrated reconstruction demo"><source src="v2/demo.mp4" type="video/mp4"><track kind="captions" src="v2/demo.vtt" srclang="en" label="English">Your browser does not support embedded video. <a href="v2/demo.mp4">Download the demo</a>.</video>
-<p class="video-caption">Metric 3D hand motion from everyday egocentric video.</p>
+<video controls playsinline preload="none" poster="v2/demo-poster.jpg?v=36" aria-label="ViDiHand V2 narrated reconstruction demo"><source src="v2/demo.mp4?v=36" type="video/mp4"><track kind="captions" src="v2/demo.vtt?v=36" srclang="en" label="English">Your browser does not support embedded video. <a href="v2/demo.mp4?v=36">Download the demo</a>.</video>
+<p class="video-caption">Metric 3D hand motion from everyday egocentric video. <span class="small">Music: <a href="https://www.scottbuckley.com.au/library/horizons/">Horizons — Scott Buckley</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</span></p>
 </section>
 <section id="results" class="section">
 <h2>Reconstruction Results</h2>
+<p class="section-intro">Drag to compare raw video with reconstructed hands, frame by frame.</p>
+<div id="task-tabs" class="tabs" role="group" aria-label="Select a video task"></div>
+<div class="task-viewer">
+<canvas id="task-canvas" width="640" height="480" role="img" aria-label="Raw video and ViDiHand V2 reconstruction comparison"></canvas>
+<div class="wipe-label raw-label">Raw video</div><div class="wipe-label reconstruction-label">ViDiHand V2</div>
+<div id="wipe-line" aria-hidden="true"><span>↔</span></div>
+<input id="wipe" type="range" min="0" max="100" value="50" aria-label="Reveal raw video on the left and reconstruction on the right">
+</div>
+<div class="task-controls"><button id="task-play" type="button">Play video</button><p id="task-caption" aria-live="polite"></p></div>
+<video id="task-video" muted loop playsinline preload="metadata" hidden></video>
+<p class="small">Move the divider or use the arrow keys. Both views come from the same video frame.</p>
+<details class="frame-comparisons"><summary>Compare selected paper frames with baselines</summary>
 <p class="section-intro">Recovering where hands really are, beyond image alignment.</p>
 <div id="case-tabs" class="tabs" role="group" aria-label="Select a scene"></div>
 <div id="case-caption" class="case-caption" aria-live="polite"></div>
 <div id="gallery" class="gallery"></div>
 <p class="small">Selected frames from the paper. Insets show a shared 3D view and wrist trails; pale hands indicate ground truth where available. Ego4D and Xperience have no ground truth here.</p>
+</details>
 </section>
 <section id="method" class="section">
 <h2>Method Overview</h2>
@@ -38,5 +51,5 @@
 
 </main>
 <footer>ViDiHand V2 · <a href="https://vidihand.github.io/">ViDiHand V1</a></footer>
-<script src="v2/app.js" defer></script>
+<script src="v2/app.js?v=36" defer></script>
 </body></html>

@@ -1,0 +1,70 @@
+{
+  "native_geometry": {
+    "14": {
+      "fps": 30,
+      "motion_unique_frames": 451,
+      "motion_frames": 451
+    },
+    "15": {
+      "fps": 30,
+      "motion_unique_frames": 451,
+      "motion_frames": 451
+    },
+    "17": {
+      "fps": 30,
+      "motion_unique_frames": 451,
+      "motion_frames": 451
+    },
+    "18": {
+      "fps": 30,
+      "motion_unique_frames": 451,
+      "motion_frames": 451
+    },
+    "19": {
+      "fps": 30,
+      "motion_unique_frames": 451,
+      "motion_frames": 451
+    },
+    "20": {
+      "fps": 30,
+      "motion_unique_frames": 451,
+      "motion_frames": 451
+    }
+  },
+  "tasks": {
+    "wild1": {
+      "fps": 20,
+      "unique_frames": 120
+    },
+    "wild2": {
+      "fps": 30,
+      "unique_frames": 180
+    },
+    "wild8": {
+      "fps": 30,
+      "unique_frames": 180
+    },
+    "paper2": {
+      "fps": 30,
+      "unique_frames": 180
+    }
+  },
+  "full_decode": true,
+  "duration": 92,
+  "frames": 2760,
+  "xperience_clip": "xp_0bc35fc7-95ce_ep5_00751",
+  "version": 36,
+  "web_demo_sha256": "49d9cf5bfc353470ced60e5e357f515b798169f6be01b0f43a8164067d5a87d9",
+  "web_demo_bytes": 10684967,
+  "browser_checks": {
+    "task_playback": 4,
+    "wipe_endpoints_and_middle": 4,
+    "responsive_widths": [
+      390,
+      768,
+      1440
+    ],
+    "javascript_errors": 0,
+    "main_video_duration": 92
+  }
+}

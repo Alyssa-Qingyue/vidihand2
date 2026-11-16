@@ -1,0 +1,30 @@
+[
+  {
+    "key": "paper2",
+    "start": 754,
+    "clip": "07f6115e44e746fc9ac3a8bd36d120fb_camera3_qc_cut_002",
+    "fps": 30,
+    "duration": 6
+  },
+  {
+    "key": "wild1",
+    "start": 65,
+    "clip": "xp_0bc35fc7-95ce_ep5_00751",
+    "fps": 20.0,
+    "duration": 6
+  },
+  {
+    "key": "wild2",
+    "start": 2080,
+    "clip": "egodex_part4_rake_smooth_zen_garden_1593",
+    "fps": 30.0,
+    "duration": 6
+  },
+  {
+    "key": "wild8",
+    "start": 2195,
+    "clip": "ego4d_020f30ad-0a70-4aaf-835b-fb394830b06c",
+    "fps": 30.0,
+    "duration": 6
+  }
+]
