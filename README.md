@@ -23,3 +23,7 @@ The task viewer packs raw and reconstruction into one video and reveals them on 
 Music: [Horizons by Scott Buckley](https://www.scottbuckley.com.au/library/horizons/), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 `v2/release.json` records native geometry frame checks and the delivered web video SHA-256. The full 92-second video decoded successfully; all 451 motion frames per baseline/GT stream were unique. Browser checks cover four tasks, slider endpoints, pointer and keyboard input, playback, and 390/768/1440px layouts.
+
+### V37 page and opening
+
+Reorganized following EgoForce's research-page sequence, using UI UX Pro Max design guidance. The synchronized raw/result task comparison is now the lead demo. Added a paper-based abstract; visual comparisons are directly visible. The narrated video is under Video. Restored a fully readable title and subtitle from its first frame, held for four seconds, and used that frame as the poster. The deleted 2D-versus-3D segment stays removed. Task videos, native-frame geometry, GT comparisons, evaluation values, soundtrack, and captions are retained.

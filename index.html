@@ -5,24 +5,20 @@
 <title>ViDiHand V2</title>
 <meta name="description" content="ViDiHand V2: Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild.">
 <meta property="og:title" content="ViDiHand V2"><meta property="og:description" content="Unifying Video Diffusion Priors and Hand Geometry for 3D Hand Motion Reconstruction in the Wild"><meta property="og:image" content="v2/teaser.png">
-<link rel="stylesheet" href="v2/style.css?v=36">
+<link rel="stylesheet" href="v2/style.css?v=37">
 </head>
 <body>
-<header><nav aria-label="Main navigation"><a href="#demo">Demo</a><a href="#results">Results</a><a href="#method">Method</a><a href="#benchmark">Evaluation</a></nav></header>
+<a class="skip-link" href="#demo">Skip to interactive demo</a><header><nav aria-label="Main navigation"><a href="#demo">Demo</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#benchmark">Results</a></nav></header>
 <main>
 <section class="hero">
 <h1>ViDiHand <span>V2</span></h1>
 <p class="subtitle">Unifying Video Diffusion Priors and Hand Geometry<br class="desktop"> for 3D Hand Motion Reconstruction in the Wild</p>
-<div class="links"><a class="button" href="https://github.com/Alyssa-Qingyue/vidihand2">GitHub ↗</a><a class="button" href="https://vidihand.github.io/">ViDiHand V1 ↗</a></div>
+<div class="links"><a class="button" href="#video">Watch video</a><a class="button" href="https://github.com/Alyssa-Qingyue/vidihand2">GitHub ↗</a><a class="button" href="https://vidihand.github.io/">ViDiHand V1 ↗</a></div>
 <p class="release-note">Paper and implementation coming soon.</p>
 </section>
-<section id="demo" class="demo section" aria-label="Video demo">
-<video controls playsinline preload="none" poster="v2/demo-poster.jpg?v=36" aria-label="ViDiHand V2 narrated reconstruction demo"><source src="v2/demo.mp4?v=36" type="video/mp4"><track kind="captions" src="v2/demo.vtt?v=36" srclang="en" label="English">Your browser does not support embedded video. <a href="v2/demo.mp4?v=36">Download the demo</a>.</video>
-<p class="video-caption">Metric 3D hand motion from everyday egocentric video. <span class="small">Music: <a href="https://www.scottbuckley.com.au/library/horizons/">Horizons — Scott Buckley</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</span></p>
-</section>
-<section id="results" class="section">
-<h2>Reconstruction Results</h2>
-<p class="section-intro">Drag to compare raw video with reconstructed hands, frame by frame.</p>
+<section id="demo" class="section">
+<h2>3D hand motion from everyday video</h2>
+<p class="section-intro">One model across cameras, activities, and interactions. Drag to explore the reconstruction.</p>
 <div id="task-tabs" class="tabs" role="group" aria-label="Select a video task"></div>
 <div class="task-viewer">
 <canvas id="task-canvas" width="640" height="480" role="img" aria-label="Raw video and ViDiHand V2 reconstruction comparison"></canvas>
@@ -33,23 +29,32 @@
 <div class="task-controls"><button id="task-play" type="button">Play video</button><p id="task-caption" aria-live="polite"></p></div>
 <video id="task-video" muted loop playsinline preload="metadata" hidden></video>
 <p class="small">Move the divider or use the arrow keys. Both views come from the same video frame.</p>
-<details class="frame-comparisons"><summary>Compare selected paper frames with baselines</summary>
+</section>
+<section id="video" class="demo section" aria-label="Video demo">
+<h2>Video</h2>
+<video controls playsinline preload="none" poster="v2/demo-poster.jpg?v=37" aria-label="ViDiHand V2 narrated reconstruction demo"><source src="v2/demo.mp4?v=37" type="video/mp4"><track kind="captions" src="v2/demo.vtt?v=37" srclang="en" label="English">Your browser does not support embedded video. <a href="v2/demo.mp4?v=37">Download the demo</a>.</video>
+<p class="video-caption">Metric 3D hand motion from everyday egocentric video. <span class="small">Music: <a href="https://www.scottbuckley.com.au/library/horizons/">Horizons — Scott Buckley</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).</span></p>
+</section>
+<section id="abstract" class="section abstract"><h2>Abstract</h2>
+<p>Reconstructing metric 3D hand motion from egocentric video is essential for learning manipulation from human demonstrations. Yet methods that regress absolute depth from appearance struggle to generalize to cameras unseen during training.</p>
+<p><strong>ViDiHand V2 unifies video diffusion priors and hand geometry.</strong> The video prior predicts MANO pose, metric shape, and 2D joint locations. Clip-Level Ray Fitting computes depth from these predictions and the camera intrinsics over a whole clip; Confidence-Gated Fusion then refines joints where their 2D locations are reliable. The model reconstructs both hands without a detector and runs at <strong>57 FPS</strong>.</p>
+<p>Experiments against 18 existing methods demonstrate improved detection, reconstruction accuracy, and temporal stability, both in-domain and in the wild.</p></section>
+<section id="method" class="section">
+<h2>Architecture</h2>
+<p class="method-text">ViDiHand V2 uses a video diffusion prior to predict MANO pose, metric shape, and 2D joints. <strong>Clip-Level Ray Fitting</strong> computes hand depth from these predictions and the camera intrinsics over a whole clip. <strong>Confidence-Gated Fusion</strong> then refines joints where their 2D locations are reliable.</p>
+<figure><img src="v2/method.png" alt="ViDiHand V2 pipeline: video diffusion features predict the hand and 2D joints, followed by Clip-Level Ray Fitting and Confidence-Gated Fusion" loading="lazy"></figure>
+<details class="geometry"><summary>Why use geometry for depth?</summary><p>A hand can align with the image yet sit at the wrong depth. Fitting a metric hand to camera rays makes its placement follow the test camera’s intrinsics.</p><img src="v2/focal.png" alt="Reconstruction under different supplied focal lengths" loading="lazy"></details>
+</section>
+<section id="results" class="section frame-comparisons"><h2>Visual Comparisons</h2>
 <p class="section-intro">Recovering where hands really are, beyond image alignment.</p>
 <div id="case-tabs" class="tabs" role="group" aria-label="Select a scene"></div>
 <div id="case-caption" class="case-caption" aria-live="polite"></div>
 <div id="gallery" class="gallery"></div>
 <p class="small">Selected frames from the paper. Insets show a shared 3D view and wrist trails; pale hands indicate ground truth where available. Ego4D and Xperience have no ground truth here.</p>
-</details>
-</section>
-<section id="method" class="section">
-<h2>Method Overview</h2>
-<p class="method-text">ViDiHand V2 uses a video diffusion prior to predict MANO pose, metric shape, and 2D joints. <strong>Clip-Level Ray Fitting</strong> computes hand depth from these predictions and the camera intrinsics over a whole clip. <strong>Confidence-Gated Fusion</strong> then refines joints where their 2D locations are reliable.</p>
-<figure><img src="v2/method.png" alt="ViDiHand V2 pipeline: video diffusion features predict the hand and 2D joints, followed by Clip-Level Ray Fitting and Confidence-Gated Fusion" loading="lazy"></figure>
-<details class="geometry"><summary>Why use geometry for depth?</summary><p>A hand can align with the image yet sit at the wrong depth. Fitting a metric hand to camera rays makes its placement follow the test camera’s intrinsics.</p><img src="v2/focal.png" alt="Reconstruction under different supplied focal lengths" loading="lazy"></details>
 </section>
 <section id="benchmark" class="section"><h2>Quantitative Results</h2><p>All 18 baselines are trained on the same egocentric datasets. In-domain results average ARCTIC, H2O, HOT3D, OakInk2, Ego-Pro and Ego-Std. The table below reproduces the paper’s main comparison.</p><div class="tabs" role="group" aria-label="Evaluation setting"><button class="active" data-setting="wild" aria-pressed="true">In the wild</button><button data-setting="domain" aria-pressed="false">In-domain</button></div><div class="table-scroll"><table><caption id="table-caption">Gen-HumanEgo · In-the-wild evaluation</caption><thead><tr><th scope="col">Method</th><th scope="col">FAcc ↑</th><th scope="col">F1 ↑</th><th scope="col">MPJPE-abs-p ↓</th><th scope="col">EPE2D-p ↓</th><th scope="col">MPJPE-p ↓</th><th scope="col">PA-p ↓</th><th scope="col">Jitter ↓</th></tr></thead><tbody id="metrics"></tbody></table></div><p class="small">FAcc and F1 in %. Pose errors in mm, EPE2D-p in pixels, jitter in mm/frame². “-p” evaluates all ground-truth hands, including a penalty for detection failures. Lower is better except detection metrics.</p><noscript><p>Enable JavaScript to switch scenes and view the interactive comparison table.</p></noscript></section>
 
 </main>
 <footer>ViDiHand V2 · <a href="https://vidihand.github.io/">ViDiHand V1</a></footer>
-<script src="v2/app.js?v=36" defer></script>
+<script src="v2/app.js?v=37" defer></script>
 </body></html>

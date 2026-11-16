@@ -53,18 +53,21 @@
   "duration": 92,
   "frames": 2760,
   "xperience_clip": "xp_0bc35fc7-95ce_ep5_00751",
-  "version": 36,
-  "web_demo_sha256": "49d9cf5bfc353470ced60e5e357f515b798169f6be01b0f43a8164067d5a87d9",
-  "web_demo_bytes": 10684967,
+  "version": 37,
+  "web_demo_sha256": "8454105121002f421575f19419322b981a3e7a046ec2117e2a027dd509da99eb",
+  "web_demo_bytes": 10620884,
   "browser_checks": {
     "task_playback": 4,
     "wipe_endpoints_and_middle": 4,
     "responsive_widths": [
+      375,
       390,
       768,
+      1024,
       1440
     ],
     "javascript_errors": 0,
     "main_video_duration": 92
-  }
+  },
+  "opening": "Complete title and subtitle visible from frame 0 through 4 seconds; title poster."
 }
