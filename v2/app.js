@@ -44,7 +44,7 @@ async function initQualitative() {
  if (!response.ok) throw Error('Comparison scenes unavailable');
  const scenes = await response.json();
  const tabs = document.querySelector('#scene-tabs'), grid = document.querySelector('#comparison-grid');
- const caption = document.querySelector('#scene-caption'), status = document.querySelector('#comparison-status');
+ const status = document.querySelector('#comparison-status');
  const play = document.querySelector('#comparison-play'), timeline = document.querySelector('#comparison-frame');
  const position = document.querySelector('#comparison-position');
  const names = {ours:'ViDiHand V2 (Ours)',gt:'Ground Truth',wilor:'WiLoR',mint:'MINT',v1:'ViDiHand V1',ace:'ACE-Ego-Hand'};
@@ -80,7 +80,6 @@ async function initQualitative() {
   if (video) {video.pause(); video.removeAttribute('src'); video.load();}
   scene = scenes[index]; contexts = []; grid.replaceChildren(); grid.dataset.scene = scene.key;
   [...tabs.children].forEach((b,i) => {b.classList.toggle('active',i===index);b.setAttribute('aria-pressed',String(i===index));});
-  caption.textContent = scene.dataset+' · '+scene.label+' · Fig. '+scene.figure;
   status.textContent = 'Loading comparison…'; play.disabled = true; updateControl();
   timeline.max = scene.frames-1; timeline.value = 0; position.textContent = '1 / '+scene.frames;
   scene.methods.forEach((method,index) => {
