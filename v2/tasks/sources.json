@@ -1,30 +1,112 @@
 [
   {
-    "key": "paper2",
-    "start": 754,
-    "clip": "07f6115e44e746fc9ac3a8bd36d120fb_camera3_qc_cut_002",
-    "fps": 30,
-    "duration": 6
-  },
-  {
     "key": "wild1",
     "start": 65,
     "clip": "xp_0bc35fc7-95ce_ep5_00751",
     "fps": 20.0,
-    "duration": 6
+    "duration": 6,
+    "dataset": "xperience",
+    "label": "Xperience",
+    "width": 480,
+    "height": 480
   },
   {
     "key": "wild2",
     "start": 2080,
     "clip": "egodex_part4_rake_smooth_zen_garden_1593",
     "fps": 30.0,
-    "duration": 6
+    "duration": 6,
+    "dataset": "egodex",
+    "label": "EgoDex",
+    "width": 832,
+    "height": 480
   },
   {
     "key": "wild8",
     "start": 2195,
     "clip": "ego4d_020f30ad-0a70-4aaf-835b-fb394830b06c",
     "fps": 30.0,
-    "duration": 6
+    "duration": 6,
+    "dataset": "ego4d",
+    "label": "Ego4D",
+    "width": 640,
+    "height": 480
+  },
+  {
+    "key": "paper2",
+    "start": 754,
+    "clip": "07f6115e44e746fc9ac3a8bd36d120fb_camera3_qc_cut_002",
+    "fps": 30.0,
+    "duration": 6,
+    "dataset": "gen_humanego_1h",
+    "label": "Gen-HumanEgo",
+    "width": 576,
+    "height": 480
+  },
+  {
+    "key": "arctic",
+    "dataset": "arctic",
+    "label": "ARCTIC",
+    "clip": "s05_box_grab_01_0",
+    "start": 247,
+    "fps": 30.0,
+    "duration": 6,
+    "width": 672,
+    "height": 480
+  },
+  {
+    "key": "h2o",
+    "dataset": "h2o",
+    "label": "H2O",
+    "clip": "subject4_h1_0_cam4",
+    "start": 160,
+    "fps": 30.0,
+    "duration": 6,
+    "width": 832,
+    "height": 480
+  },
+  {
+    "key": "hot3d",
+    "dataset": "hot3d",
+    "label": "HOT3D",
+    "clip": "P0001_83b755aa_seg_000_qc_cut_000",
+    "start": 146,
+    "fps": 30.0,
+    "duration": 6,
+    "width": 480,
+    "height": 480
+  },
+  {
+    "key": "oakink2",
+    "dataset": "oakink2",
+    "label": "OakInk2",
+    "clip": "scene_01__A001++seq__083f7a577484ba7929a9__2023-04-27-19-25-24_0",
+    "start": 537,
+    "fps": 30.0,
+    "duration": 6,
+    "width": 832,
+    "height": 480
+  },
+  {
+    "key": "egodemo_egopro_standard",
+    "dataset": "egodemo_egopro_standard",
+    "label": "Ego-Pro",
+    "clip": "02f44b4e-09e3-451f-b24b-0e7499e3eb78_part0000_qc_cut_000",
+    "start": 1231,
+    "fps": 30.0,
+    "duration": 6,
+    "width": 608,
+    "height": 480
+  },
+  {
+    "key": "egodemo_egostandard",
+    "dataset": "egodemo_egostandard",
+    "label": "Ego-Std",
+    "clip": "07002087-8969-4b3a-adb1-1d207f3fab2f",
+    "start": 0,
+    "fps": 30.0,
+    "duration": 5.199948,
+    "width": 608,
+    "height": 480
   }
 ]

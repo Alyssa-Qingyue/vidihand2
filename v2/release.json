@@ -1,64 +1,132 @@
 {
-  "native_geometry": {
-    "14": {
-      "fps": 30,
-      "motion_unique_frames": 451,
-      "motion_frames": 451
+  "version": 38,
+  "presentation": "interactive raw/result only",
+  "datasets": [
+    {
+      "key": "wild1",
+      "start": 65,
+      "clip": "xp_0bc35fc7-95ce_ep5_00751",
+      "fps": 20.0,
+      "duration": 6,
+      "dataset": "xperience",
+      "label": "Xperience",
+      "width": 480,
+      "height": 480,
+      "sha256": "f9b367e06f0147240b5b9fa2dcef10463c9df6c75c9675ef9e4692a3521febbc"
     },
-    "15": {
-      "fps": 30,
-      "motion_unique_frames": 451,
-      "motion_frames": 451
+    {
+      "key": "wild2",
+      "start": 2080,
+      "clip": "egodex_part4_rake_smooth_zen_garden_1593",
+      "fps": 30.0,
+      "duration": 6,
+      "dataset": "egodex",
+      "label": "EgoDex",
+      "width": 832,
+      "height": 480,
+      "sha256": "f0dd56b0fab58f3217fa6ae8fef5e880194d6fa5e341794c68aa59deececd33b"
     },
-    "17": {
-      "fps": 30,
-      "motion_unique_frames": 451,
-      "motion_frames": 451
+    {
+      "key": "wild8",
+      "start": 2195,
+      "clip": "ego4d_020f30ad-0a70-4aaf-835b-fb394830b06c",
+      "fps": 30.0,
+      "duration": 6,
+      "dataset": "ego4d",
+      "label": "Ego4D",
+      "width": 640,
+      "height": 480,
+      "sha256": "5a5f5baf0da1bb69f57aec11fc9fb16fc6e2e03eb2013a24b98dcfe2492ac95a"
     },
-    "18": {
-      "fps": 30,
-      "motion_unique_frames": 451,
-      "motion_frames": 451
+    {
+      "key": "paper2",
+      "start": 754,
+      "clip": "07f6115e44e746fc9ac3a8bd36d120fb_camera3_qc_cut_002",
+      "fps": 30.0,
+      "duration": 6,
+      "dataset": "gen_humanego_1h",
+      "label": "Gen-HumanEgo",
+      "width": 576,
+      "height": 480,
+      "sha256": "bc02d1f122a8a2a17881473b9cb14e6b110910b42e1c715767f29dcf3bb57482"
     },
-    "19": {
-      "fps": 30,
-      "motion_unique_frames": 451,
-      "motion_frames": 451
+    {
+      "key": "arctic",
+      "dataset": "arctic",
+      "label": "ARCTIC",
+      "clip": "s05_box_grab_01_0",
+      "start": 247,
+      "fps": 30.0,
+      "duration": 6,
+      "width": 672,
+      "height": 480,
+      "sha256": "e0c7d99b1203a268463aed0a4ed818bfd26ed2b37e30a2dc8d79b4f56080ef45"
     },
-    "20": {
-      "fps": 30,
-      "motion_unique_frames": 451,
-      "motion_frames": 451
+    {
+      "key": "h2o",
+      "dataset": "h2o",
+      "label": "H2O",
+      "clip": "subject4_h1_0_cam4",
+      "start": 160,
+      "fps": 30.0,
+      "duration": 6,
+      "width": 832,
+      "height": 480,
+      "sha256": "7f7f0bc7d6b73e4c214f39607f8a178db4d707fb474073a59c5b5e92b3f85ca0"
+    },
+    {
+      "key": "hot3d",
+      "dataset": "hot3d",
+      "label": "HOT3D",
+      "clip": "P0001_83b755aa_seg_000_qc_cut_000",
+      "start": 146,
+      "fps": 30.0,
+      "duration": 6,
+      "width": 480,
+      "height": 480,
+      "sha256": "a1a7af347c7a6abc6c5570367cf6034702f635d2b03017dcb9ceb9c22b2d15ee"
+    },
+    {
+      "key": "oakink2",
+      "dataset": "oakink2",
+      "label": "OakInk2",
+      "clip": "scene_01__A001++seq__083f7a577484ba7929a9__2023-04-27-19-25-24_0",
+      "start": 537,
+      "fps": 30.0,
+      "duration": 6,
+      "width": 832,
+      "height": 480,
+      "sha256": "b39b9dac69a6c5afd93519f233c8d683e004e92a4b332a37b5a700fe48511c93"
+    },
+    {
+      "key": "egodemo_egopro_standard",
+      "dataset": "egodemo_egopro_standard",
+      "label": "Ego-Pro",
+      "clip": "02f44b4e-09e3-451f-b24b-0e7499e3eb78_part0000_qc_cut_000",
+      "start": 1231,
+      "fps": 30.0,
+      "duration": 6,
+      "width": 608,
+      "height": 480,
+      "sha256": "248b3b27020c6258aef8294daa60f0b63f906f53fb15e06ef3e161700bb50cca"
+    },
+    {
+      "key": "egodemo_egostandard",
+      "dataset": "egodemo_egostandard",
+      "label": "Ego-Std",
+      "clip": "07002087-8969-4b3a-adb1-1d207f3fab2f",
+      "start": 0,
+      "fps": 30.0,
+      "duration": 5.199948,
+      "width": 608,
+      "height": 480,
+      "sha256": "88a90f64d0c9da8a4458cef913b3cb052ff3cf61ae39ba7954d71c3bc2af4b21"
     }
-  },
-  "tasks": {
-    "wild1": {
-      "fps": 20,
-      "unique_frames": 120
-    },
-    "wild2": {
-      "fps": 30,
-      "unique_frames": 180
-    },
-    "wild8": {
-      "fps": 30,
-      "unique_frames": 180
-    },
-    "paper2": {
-      "fps": 30,
-      "unique_frames": 180
-    }
-  },
-  "full_decode": true,
-  "duration": 92,
-  "frames": 2760,
-  "xperience_clip": "xp_0bc35fc7-95ce_ep5_00751",
-  "version": 37,
-  "web_demo_sha256": "8454105121002f421575f19419322b981a3e7a046ec2117e2a027dd509da99eb",
-  "web_demo_bytes": 10620884,
+  ],
   "browser_checks": {
-    "task_playback": 4,
-    "wipe_endpoints_and_middle": 4,
+    "playback": 10,
+    "wipe_endpoints_and_middle": 10,
+    "native_aspect_ratio": 10,
     "responsive_widths": [
       375,
       390,
@@ -66,8 +134,6 @@
       1024,
       1440
     ],
-    "javascript_errors": 0,
-    "main_video_duration": 92
-  },
-  "opening": "Complete title and subtitle visible from frame 0 through 4 seconds; title poster."
+    "javascript_errors": 0
+  }
 }

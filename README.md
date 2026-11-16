@@ -27,3 +27,7 @@ Music: [Horizons by Scott Buckley](https://www.scottbuckley.com.au/library/horiz
 ### V37 page and opening
 
 Reorganized following EgoForce's research-page sequence, using UI UX Pro Max design guidance. The synchronized raw/result task comparison is now the lead demo. Added a paper-based abstract; visual comparisons are directly visible. The narrated video is under Video. Restored a fully readable title and subtitle from its first frame, held for four seconds, and used that frame as the poster. The deleted 2D-versus-3D segment stays removed. Task videos, native-frame geometry, GT comparisons, evaluation values, soundtrack, and captions are retained.
+
+### V38 interactive-only presentation
+
+The page now has one demo format: synchronized raw/result wipe comparisons. All ten named datasets have playable clips: Xperience, EgoDex, Ego4D, Gen-HumanEgo, ARCTIC, H2O, HOT3D, OakInk2, Ego-Pro, Ego-Std. The narrated video and static frame gallery are removed from the page; narrated video remains in the local demo workspace. Task exports use native aspect ratios with no added padding. `v2/tasks/sources.json` records source clips, start frames, native FPS, and export dimensions. Browser verification covers all ten clips, slider extremes/midpoint, and five viewport widths.

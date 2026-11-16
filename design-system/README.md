@@ -8,3 +8,5 @@ Applied UI UX Pro Max guidance: content-first hierarchy, restrained Swiss typogr
 Order: full paper title and resource links → interactive reconstruction demo → narrated video → abstract → architecture → visual comparisons → quantitative results.
 
 Keep publication metadata limited to verified details. Main demo uses one packed decoded frame for both comparison views. Default Xperience clip is the paper's multi-person case. Video frame zero and poster show the full title, held for four seconds before baselines. Geometry assets preserve source 20/30 FPS.
+
+V38 overrides the earlier page order: interactive demo → abstract → architecture → quantitative results. Only one demo format is shown. Every named dataset has an interactive clip; each viewer follows its source aspect ratio without letterboxing.
