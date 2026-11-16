@@ -1,5 +1,5 @@
 {
-  "version": 46,
+  "version": 47,
   "presentation": "Full narrated demo followed by synchronized qualitative comparisons from paper Figures 5 and 6",
   "narrated_demo": {
     "file": "v2/demo-v46.mp4",
@@ -13,7 +13,7 @@
     "wild_comparisons": "Raw input + all 18 baselines + ours for Xperience, EgoDex, Ego4D and GenHumanEgo; additional ground truth for GenHumanEgo; native-rate 3D insets"
   },
   "qualitative_comparisons": {
-    "scenes": "v2/qualitative/scenes.json",
+    "scenes": "v2/qualitative/scenes-v47.json",
     "figures": [
       5,
       6
@@ -37,7 +37,7 @@
         "frames": 180,
         "fps": 30.0,
         "width": 416,
-        "height": 286,
+        "height": 598,
         "columns": 4,
         "methods": [
           "input",
@@ -48,13 +48,18 @@
           "v1",
           "ace"
         ],
-        "video": "gen01.mp4",
+        "video": "gen01-stacked-v47.mp4",
         "crop": [
           0,
           150,
           410,
           282
-        ]
+        ],
+        "imageHeight": 286,
+        "geometryHeight": 312,
+        "posterSuffix": "-v47",
+        "layout": "2D reconstruction above 3D hands and native wrist trajectories",
+        "camera": "Fixed shared camera for the complete six-second clip"
       },
       {
         "key": "drawer167",
@@ -67,7 +72,7 @@
         "frames": 180,
         "fps": 30.0,
         "width": 416,
-        "height": 244,
+        "height": 556,
         "columns": 4,
         "methods": [
           "input",
@@ -78,13 +83,18 @@
           "v1",
           "ace"
         ],
-        "video": "drawer167.mp4",
+        "video": "drawer167-stacked-v47.mp4",
         "crop": [
           66,
           180,
           510,
           300
-        ]
+        ],
+        "imageHeight": 244,
+        "geometryHeight": 312,
+        "posterSuffix": "-v47",
+        "layout": "2D reconstruction above 3D hands and native wrist trajectories",
+        "camera": "Fixed shared camera for the complete six-second clip"
       },
       {
         "key": "s6basket",
@@ -97,7 +107,7 @@
         "frames": 180,
         "fps": 30.0,
         "width": 416,
-        "height": 312,
+        "height": 624,
         "columns": 4,
         "methods": [
           "input",
@@ -108,13 +118,18 @@
           "v1",
           "ace"
         ],
-        "video": "s6basket.mp4",
+        "video": "s6basket-stacked-v47.mp4",
         "crop": [
           111,
           214,
           316,
           237
-        ]
+        ],
+        "imageHeight": 312,
+        "geometryHeight": 312,
+        "posterSuffix": "-v47",
+        "layout": "2D reconstruction above 3D hands and native wrist trajectories",
+        "camera": "Fixed shared camera for the complete six-second clip"
       },
       {
         "key": "ego4dplant",
@@ -127,7 +142,7 @@
         "frames": 180,
         "fps": 30.0,
         "width": 416,
-        "height": 208,
+        "height": 520,
         "columns": 4,
         "methods": [
           "input",
@@ -137,13 +152,18 @@
           "v1",
           "ace"
         ],
-        "video": "ego4dplant.mp4",
+        "video": "ego4dplant-stacked-v47.mp4",
         "crop": [
           0,
           180,
           720,
           360
-        ]
+        ],
+        "imageHeight": 208,
+        "geometryHeight": 312,
+        "posterSuffix": "-v47",
+        "layout": "2D reconstruction above 3D hands and native wrist trajectories",
+        "camera": "Fixed shared camera for the complete six-second clip"
       },
       {
         "key": "egodex",
@@ -156,7 +176,7 @@
         "frames": 180,
         "fps": 30.0,
         "width": 416,
-        "height": 208,
+        "height": 520,
         "columns": 4,
         "methods": [
           "input",
@@ -166,13 +186,18 @@
           "v1",
           "ace"
         ],
-        "video": "egodex.mp4",
+        "video": "egodex-stacked-v47.mp4",
         "crop": [
           0,
           0,
           832,
           416
-        ]
+        ],
+        "imageHeight": 208,
+        "geometryHeight": 312,
+        "posterSuffix": "-v47",
+        "layout": "2D reconstruction above 3D hands and native wrist trajectories",
+        "camera": "Fixed shared camera for the complete six-second clip"
       },
       {
         "key": "xperience",
@@ -185,7 +210,7 @@
         "frames": 120,
         "fps": 20.0,
         "width": 416,
-        "height": 208,
+        "height": 520,
         "columns": 4,
         "methods": [
           "input",
@@ -195,14 +220,22 @@
           "v1",
           "ace"
         ],
-        "video": "xperience.mp4",
+        "video": "xperience-stacked-v47.mp4",
         "crop": [
           0,
           35,
           480,
           240
-        ]
+        ],
+        "imageHeight": 208,
+        "geometryHeight": 312,
+        "posterSuffix": "-v47",
+        "layout": "2D reconstruction above 3D hands and native wrist trajectories",
+        "camera": "Fixed shared camera for the complete six-second clip"
       }
-    ]
+    ],
+    "layout": "Each method stacks its original 2D reconstruction above a synchronized 3D hand and wrist-trajectory view; input preserves its original aspect ratio",
+    "native_fps": "30 fps; Xperience 20 fps",
+    "geometry": "Exact Fig. 5/6 cases, fixed shared camera per scene, native wrist samples"
   }
 }

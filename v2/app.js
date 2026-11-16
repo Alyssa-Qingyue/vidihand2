@@ -40,7 +40,7 @@ async function initResults() {
 initResults().catch(() => {document.querySelector('#table-caption').textContent = 'Results unavailable.';});
 
 async function initQualitative() {
- const response = await fetch('v2/qualitative/scenes.json?v=45');
+ const response = await fetch('v2/qualitative/scenes-v47.json');
  if (!response.ok) throw Error('Comparison scenes unavailable');
  const scenes = await response.json();
  const tabs = document.querySelector('#scene-tabs'), grid = document.querySelector('#comparison-grid');
@@ -56,7 +56,7 @@ async function initQualitative() {
  }
  function draw() {
   if (!video || video.readyState < 2) return;
-  contexts.forEach((ctx,i) => ctx.drawImage(video,(i%scene.columns)*scene.width,Math.floor(i/scene.columns)*scene.height,scene.width,scene.height,0,0,scene.width,scene.height));
+  contexts.forEach(({ctx,height},i) => ctx.drawImage(video,(i%scene.columns)*scene.width,Math.floor(i/scene.columns)*scene.height,scene.width,height,0,0,scene.width,height));
   const frame = Math.min(scene.frames-1,Math.round(video.currentTime*scene.fps));
   timeline.value = frame; position.textContent = (frame+1)+' / '+scene.frames;
   grid.dataset.frame = frame;
@@ -88,11 +88,11 @@ async function initQualitative() {
    const card = document.createElement('figure');
    card.className = 'comparison-card '+(method==='ours'?'ours ':'')+(['input','ours','gt'].includes(method)?'primary':'baseline');
    const label = document.createElement('figcaption');label.textContent = names[method];
-   const canvas = document.createElement('canvas');canvas.width = scene.width;canvas.height = scene.height;
-   canvas.setAttribute('role','img');canvas.setAttribute('aria-label',scene.label+' — '+names[method]);
-   const ctx = canvas.getContext('2d');contexts.push(ctx);
-   const poster = new Image();poster.onload = () => {if (token===generation && (!video || video.readyState<2)) ctx.drawImage(poster,0,0,canvas.width,canvas.height);};
-   poster.src = 'v2/qualitative/'+scene.key+'-'+method+'.jpg';
+   const canvas = document.createElement('canvas');canvas.width = scene.width;canvas.height = method==='input' ? scene.imageHeight : scene.height;
+   canvas.setAttribute('role','img');canvas.setAttribute('aria-label',scene.label+' — '+names[method]+(method==='input'?'':': 2D reconstruction above 3D hands and wrist trajectories'));
+   const ctx = canvas.getContext('2d');contexts.push({ctx,height:canvas.height});
+   const poster = new Image();poster.onload = () => {if (token===generation && (!video || video.readyState<2)) ctx.drawImage(poster,0,0,canvas.width,canvas.height,0,0,canvas.width,canvas.height);};
+   poster.src = 'v2/qualitative/'+scene.key+'-'+method+(scene.posterSuffix||'')+'.jpg';
    card.append(label,canvas);grid.append(card);
   });
   video = document.createElement('video');video.muted = true;video.loop = true;video.playsInline = true;video.preload = 'auto';
