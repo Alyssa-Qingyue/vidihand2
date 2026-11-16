@@ -13,3 +13,7 @@ V2 figures and results come from the November 15 paper source. `v2/results.json`
 `v2/build_assets.py` records how paper figures and case images were exported in the author's workspace. It is not required to serve the site.
 
 GitHub Pages can serve this repository from `main` at `/` using the included deployment workflow.
+
+## Page layout
+
+The homepage follows a compact research-page structure: title and links, narrated demo, reconstruction comparisons, method overview, and quantitative results. Depth/focal-length discussion is expandable. `v2/demo.mp4` is the V35 web preview with matching English captions and a reconstruction-result poster. Video loads on demand.
